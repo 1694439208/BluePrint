@@ -208,7 +208,7 @@ namespace 蓝图重制版.BluePrint
             //Console.WriteLine($"key:{key}");
             //cpf接收不到alt的消息暂时用ctrl代替，等待修复
             if (e.MouseButton == MouseButton.Right &&
-                key == InputModifiers.Control)
+                (key == InputModifiers.Control|| key == (InputModifiers.Control | InputModifiers.RightMouseButton)))
             {
                 mousePos = e.Location / scale;
                 CaptureMouse();
