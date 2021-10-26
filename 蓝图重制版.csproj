@@ -1,0 +1,91 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
+    <ApplicationIcon />
+    <StartupObject />
+    <Configurations>Debug;Release;类库d</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants />
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='类库d|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants />
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="buttons.css" />
+    <None Remove="css\element_icons.ttf" />
+    <None Remove="Data\test.jpg" />
+    <None Remove="ElementUI1.css" />
+    <None Remove="ElementUI2.css" />
+    <None Remove="icons.css" />
+    <None Remove="Stylesheet1.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="css\buttons.css" />
+    <EmbeddedResource Include="css\element_icons.ttf" />
+    <EmbeddedResource Include="Data\test.jpg" />
+    <EmbeddedResource Include="css\ElementUI1.css" />
+    <EmbeddedResource Include="css\ElementUI2.css" />
+    <EmbeddedResource Include="css\icons.css" />
+    <EmbeddedResource Include="css\Stylesheet1.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xhm.CPF" Version="0.9.4.2" />
+    <PackageReference Include="Xhm.CPF.Windows" Version="0.9.4.2" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
+    <PackageReference Include="Xhm.CPF.Skia" Version="0.9.4.2" />
+    <PackageReference Include="Xhm.CPF.Mac" Version="0.9.4.2" />
+    <PackageReference Include="Xhm.CPF.Linux" Version="0.9.4.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="BluePrint\Controls\ElTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\IJoin\IJoinControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\GreaterThan.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\ImageShow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\ImageSplit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\INode\NodeBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\Branch.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\_StartNode.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Join\SliderJoint.cs" />
+    <Compile Update="BluePrint\Join\DateJoint .cs" />
+    <Compile Update="BluePrint\Join\imageJoint.cs" />
+    <Compile Update="BluePrint\Join\ValueText.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <PropertyGroup>
+    <DefineConstants Condition="'$(TargetFramework)'=='net40'">Net4</DefineConstants>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.0|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+</Project>

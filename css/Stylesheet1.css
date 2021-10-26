@@ -1,0 +1,63 @@
+﻿@media windows {
+    * {
+        FontFamily: '微软雅黑'; /*不同系统的字体不同，自己根据情况改或者使用内嵌字体*/
+    }
+}
+
+@media osx {
+    * {
+        FontFamily: '苹方-简';
+    }
+}
+
+@media linux {
+    * {
+        FontFamily: '文泉驿正黑';
+    }
+}
+
+.ContextMenu1 ContentControl {
+    Width: 30;
+}
+
+.IJoinControl {
+    MarginTop: 10;
+}
+.el-textbox {
+    Background: #fff;
+    IsAntiAlias: true;
+    BorderFill: #DCDFE6;
+    CornerRadius: 4,4,4,4;
+    BorderStroke: 1;
+}
+.el-textbox[IsKeyboardFocusWithin=true] {
+    BorderFill: #1E9FFF;
+}
+#SearchElTextBox {
+    Width:50;
+}
+
+.single { /*单行文本框*/
+    AcceptsReturn: false;
+    HScrollBarVisibility: Hidden;
+    VScrollBarVisibility: Hidden;
+    FontSize: 20;
+}
+.single #placeholder {
+    MarginTop: auto;
+}
+
+.single #scrollViewer {
+    Height: auto;
+}
+
+.single > Border {
+    Margin: 5,0,5,0;
+}
+/*TextBox {
+    BorderFill: rgb(220,220,220);
+    BorderStroke: 1;
+}*/
+/*TextBox #contentPresenter {
+    Padding: 1;
+}*/

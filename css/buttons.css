@@ -1,0 +1,110 @@
+﻿ElButton {
+    font-size: 14;
+}
+
+ElButton {
+    BorderFill: #DCDFE6;
+    IsAntiAlias: True;
+    CornerRadius: 4,4,4,4;
+    Background: #FFFFFF;
+}
+
+    ElButton[IsMouseOver=true] {
+        BorderFill: rgb(198,226,255);
+        Background: rgb(236,245,255);
+        Foreground: rgb(64,158,255);
+    }
+
+    ElButton[IsPressed=true] {
+        BorderFill: rgb(58,142,230);
+    }
+
+    ElButton.primary {
+        BorderFill: rgb(64,158,255);
+        CornerRadius: 4,4,4,4;
+        Background: rgb(64,158,255);
+        Foreground: #FFFFFF;
+    }
+
+        ElButton.primary[IsMouseOver=true] {
+            BorderFill: rgb(102,177,255);
+            Background: rgb(102,177,255);
+            Foreground: #FFFFFF;
+        }
+
+        ElButton.primary[IsPressed=true] {
+            BorderFill: rgb(58,142,230);
+            Background: rgb(58,142,230);
+        }
+
+    ElButton.success {
+        BorderFill: rgb(103,194,58);
+        CornerRadius: 4,4,4,4;
+        Background: rgb(103,194,58);
+        Foreground: #FFFFFF;
+    }
+
+        ElButton.success[IsMouseOver=true] {
+            BorderFill: rgb(133,206,97);
+            Background: rgb(133,206,97);
+            Foreground: #FFFFFF;
+        }
+
+        ElButton.success[IsPressed=true] {
+            BorderFill: rgb(93,175,52);
+            Background: rgb(93,175,52);
+        }
+
+    ElButton.info {
+        BorderFill: rgb(144,147,153);
+        Background: rgb(144,147,153);
+        CornerRadius: 4,4,4,4;
+        Foreground: #FFFFFF;
+    }
+
+        ElButton.info[IsMouseOver=true] {
+            BorderFill: rgb(166,169,173);
+            Background: rgb(166,169,173);
+            Foreground: #FFFFFF;
+        }
+
+        ElButton.info[IsPressed=true] {
+            BorderFill: rgb(130,132,138);
+            Background: rgb(130,132,138);
+        }
+
+    ElButton.warning {
+        BorderFill: rgb(230,162,60);
+        Background: rgb(230,162,60);
+        CornerRadius: 4,4,4,4;
+        Foreground: #FFFFFF;
+    }
+
+        ElButton.warning[IsMouseOver=true] {
+            BorderFill: rgb(235,181,99);
+            Background: rgb(235,181,99);
+            Foreground: #FFFFFF;
+        }
+
+        ElButton.warning[IsPressed=true] {
+            BorderFill: rgb(207,146,54);
+            Background: rgb(207,146,54);
+        }
+
+    ElButton.danger {
+        BorderFill: rgb(245,108,108);
+        Background: rgb(245,108,108);
+        CornerRadius: 4,4,4,4;
+        Foreground: #FFFFFF;
+    }
+
+        ElButton.danger[IsMouseOver=true] {
+            BorderFill: rgb(247,137,137);
+            Background: rgb(247,137,137);
+            Foreground: #FFFFFF;
+        }
+
+        ElButton.danger[IsPressed=true] {
+            BorderFill: rgb(221,97,97);
+            Background: rgb(221,97,97);
+        }

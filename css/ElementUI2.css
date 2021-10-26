@@ -1,0 +1,475 @@
+﻿@media windows {
+    * {
+        FontFamily: '微软雅黑'; /*不同系统的字体不同，自己根据情况改或者使用内嵌字体*/
+    }
+}
+
+@media osx {
+    * {
+        FontFamily: '苹方-简';
+    }
+}
+
+@media linux {
+    * {
+        FontFamily: '文泉驿正黑';
+    }
+}
+
+#headBorder {
+    Background: rgb(84,92,100);
+    ZIndex: 1;
+    BorderThickness: 0,0,0,1;
+}
+
+#headBorder TextBlock {
+    FontSize: 14;
+    Foreground: #fff;
+}
+
+#headBorder .el-menu-item {
+    Height: 60;
+}
+    #headBorder .el-menu-item[IsMouseOver=true] {
+        Background: rgb(67,74,80);
+    }
+
+    #headBorder .el-menu-item > .item-border {
+        BorderThickness: 0,0,0,3;
+        Height: 60;
+        Padding: 18,0,18,0;
+    }
+
+    #headBorder .el-menu-item[IsSelected=true] > .item-border {
+        BorderFill: rgb(255,208,75);
+        Background: null;
+    }
+
+    #headBorder .el-menu-item[IsSelected=true] .item-border TextBlock {
+        Foreground: rgb(255,208,75);
+    }
+
+#headBorder ListBoxItem {
+    Width: 100%;
+    Height: 36;
+}
+
+    #headBorder ListBoxItem[IsMouseOver=true] {
+        Background: rgb(67,74,80);
+    }
+
+#headBorder #subMenu {
+    Background: rgb(84,92,100);
+}
+
+
+.el-radio #radioButtonBorder {
+    StrokeFill: rgb(220,223,230);
+}
+
+.el-radio[IsChecked=true] #radioButtonBorder {
+    StrokeFill: #1E9FFF;
+    Fill: #1E9FFF;
+}
+
+.el-radio #optionMark {
+    StrokeFill: #1E9FFF;
+    Fill: #fff;
+}
+
+.el-radio-group {
+    BorderType: BorderThickness;
+    BorderFill: rgb(220,223,230);
+    BorderThickness: 1,1,0,1;
+}
+
+    .el-radio-group RadioButton {
+        BorderType: BorderThickness;
+        BorderFill: rgb(220,223,230);
+        BorderThickness: 0,0,1,0;
+    }
+
+        .el-radio-group RadioButton #markPanel {
+            Visibility: Collapsed;
+        }
+
+        .el-radio-group RadioButton TextBlock {
+            Margin: 5;
+        }
+
+        .el-radio-group RadioButton[IsChecked=true] {
+            Background: rgb(64,158,255);
+            Foreground: #fff;
+        }
+
+
+.el-checkbox #indeterminateMark {
+    Fill: #1E9FFF;
+}
+
+.el-checkbox #checkBoxBorder {
+    Background: #fff;
+    BorderFill: rgb(220,223,230);
+}
+
+.el-checkbox[IsChecked=true] #checkBoxBorder {
+    Background: #1E9FFF;
+    BorderFill: #1E9FFF;
+}
+
+.el-checkbox Polyline {
+    StrokeFill: #fff;
+}
+
+.el-textbox {
+    Background: #fff;
+    IsAntiAlias: true;
+    BorderFill: #DCDFE6;
+    CornerRadius: 4,4,4,4;
+    BorderStroke: 1;
+}
+
+    .el-textbox[IsKeyboardFocusWithin=true] {
+        BorderFill: #1E9FFF;
+    }
+
+.single { /*单行文本框*/
+    AcceptsReturn: false;
+    HScrollBarVisibility: Hidden;
+    VScrollBarVisibility: Hidden;
+}
+
+    .single #placeholder {
+        MarginTop: auto;
+    }
+
+    .single #scrollViewer {
+        Height: auto;
+    }
+
+    .single > Border {
+        Margin: 5,0,5,0;
+    }
+
+.slot-left {
+    CornerRadius: 0,4,4,0;
+    BorderFill: #DCDFE6;
+    Background: #F5F7FA;
+    BorderThickness: 1,0,0,0;
+    BorderType: BorderThickness;
+    MarginTop: 0;
+    MarginBottom: 0;
+    MarginRight: 0;
+}
+
+#dropDownBorder {
+    ShadowBlur: 5;
+    ShadowColor: rgba(0, 0, 0, 0.4);
+    BorderStroke: 0;
+}
+
+#DropDownPanel TextBlock {
+    MarginLeft: 5;
+    MarginTop: 2;
+    MarginBottom: 2;
+    font-size: 14;
+}
+
+ScrollBar {
+    Background: null;
+}
+
+    ScrollBar Thumb {
+        IsAntiAlias: true;
+        CornerRadius: 5;
+    }
+
+    ScrollBar[Orientation=Horizontal] {
+        Height: 12;
+    }
+
+    ScrollBar[Orientation=Vertical] {
+        Width: 12;
+    }
+
+    ScrollBar #PART_LineUpButton, ScrollBar #PART_LineDownButton {
+        Visibility: Collapsed;
+    }
+
+
+#DropDownPanel ScrollBar {
+    Background: null;
+}
+
+    #DropDownPanel ScrollBar Thumb {
+        CornerRadius: 5;
+    }
+
+#DropDownPanel[IsMouseOver=false] ScrollBar {
+    Visibility: Collapsed;
+}
+
+#DropDownPanel ScrollBar[Orientation=Horizontal] {
+    Height: 10;
+}
+
+#DropDownPanel ScrollBar[Orientation=Vertical] {
+    Width: 10;
+}
+
+#DropDownPanel ScrollBar #PART_LineUpButton, #DropDownPanel ScrollBar #PART_LineDownButton {
+    Visibility: Collapsed;
+}
+
+/*combobox显示下拉框的动画*/
+@keyframes comboboxDropDown {
+    0% {
+        RenderTransform: scale(1,0.1);
+    }
+
+    100% {
+        RenderTransform: scale(1,1);
+    }
+}
+
+#DropDownPanel {
+    RenderTransformOrigin: 50%,0;
+}
+
+#DropDownPopup[Visibility=Visible] #DropDownPanel {
+    animation-name: comboboxDropDown;
+    animation-duration: 0.1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.el-slider {
+    IsAntiAlias: true;
+}
+
+    .el-slider Thumb {
+        IsAntiAlias: true;
+        Width: 16;
+        Height: 16;
+        CornerRadius: 7;
+        BorderFill: rgb(64,158,255);
+        BorderStroke: 2;
+        Background: #fff;
+        ZIndex: 1;
+    }
+
+@keyframes sliderMouseOver {
+    0% {
+        RenderTransform: scale(1,1);
+    }
+
+    100% {
+        RenderTransform: scale(1.2,1.2);
+    }
+}
+
+.el-slider Thumb[IsMouseOver=true] {
+    animation-name: sliderMouseOver;
+    animation-duration: 0.1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.el-slider #TrackBackground {
+    CornerRadius: 2;
+    Background: rgb(228,231,237);
+    BorderStroke: 0;
+}
+
+.el-slider #decreaseRepeatButton {
+    Background: rgb(64,158,255);
+    CornerRadius: 2;
+}
+
+.el-slider[Orientation=Horizontal] #decreaseRepeatButton {
+    Height: 4;
+    MarginLeft: 5;
+}
+
+.el-slider[Orientation=Vertical] #decreaseRepeatButton {
+    Width: 4;
+    MarginBottom: 5;
+}
+
+Calendar {
+    BorderFill: #DCDFE6;
+}
+
+CalendarDayButton[IsSelected=true] {
+    Width: 22;
+    Height: 22;
+    CornerRadius: 10;
+    Background: rgb(64,158,255);
+    Foreground: #fff;
+    FontStyle: Bold;
+}
+
+CalendarDayButton[IsMouseOver=true] {
+    Background: rgb(64,158,255);
+    Foreground: #fff;
+}
+
+.el-progress {
+    CornerRadius: 5;
+    IsAntiAlias: true;
+    BorderFill: null;
+    Background: rgb(235,238,245);
+}
+
+    .el-progress #Indicator, .el-progress #Animation {
+        CornerRadius: 5;
+    }
+
+.el-alert {
+    CornerRadius: 5;
+}
+
+    .el-alert TextBlock {
+        MarginLeft: 8;
+        MarginBottom: 5;
+        MarginTop: 5;
+        MarginRight: 8;
+    }
+
+    .el-alert.success {
+        Background: rgb(240,249,235);
+        Foreground: rgb(103,194,58);
+    }
+
+    .el-alert.info {
+        Background: rgb(244,244,245);
+        Foreground: rgb(144,147,153);
+    }
+
+    .el-alert.warning {
+        Background: rgb(253,246,236);
+        Foreground: rgb(230,162,60);
+    }
+
+    .el-alert.error {
+        Background: rgb(254,240,240);
+        Foreground: rgb(245,108,108);
+    }
+
+#tooltipContent {
+    Background: rgb(48,49,51);
+    BorderFill: null;
+    CornerRadius: 4;
+    IsAntiAlias: true;
+}
+
+    #tooltipContent TextBlock {
+        Foreground: #fff;
+    }
+
+.el-input-number RepeatButton {
+    Width: 20;
+    Background: rgb(245,247,250);
+}
+
+.el-input-number #decreaseBtn {
+    CornerRadius: 4,0,0,4;
+}
+
+.el-input-number #increaseBtn {
+    CornerRadius: 0,4,4,0;
+}
+
+.el-input-number #textBoxBorder {
+    BorderFill: #DCDFE6;
+}
+
+DataGrid {
+    Foreground: #7a7a7a;
+}
+
+DataGridCellTemplate, DataGridRow, DataGrid {
+    BorderFill: rgb(235,238,245);
+}
+
+DataGridRow {
+    Height: 50;
+}
+
+    DataGridRow[IsMouseOver=true] {
+        Background: rgb(245,247,250);
+    }
+
+    DataGridRow[IsSelected=true] {
+        Background: rgb(245,247,250);
+    }
+
+DataGridColumnTemplate {
+    Height: 40;
+    FontSize: 16;
+    FontStyle: Bold;
+    Background: #fff;
+    BorderFill: rgb(235,238,245);
+}
+
+#treeViewItem, TreeViewItem, TreeViewItem > StackPanel, #itemsPanel {
+    MinWidth: 100%;
+}
+
+TreeViewItem {
+    FontSize: 14;
+    Foreground: #7a7a7a;
+}
+
+    TreeViewItem[IsSelected=true] > StackPanel > #treeViewItem {
+        Background: rgb(235,237,240);
+    }
+
+
+.el-tab1 #headBorder {
+    Background: rgb(245,247,250);
+}
+
+.el-tab1 TabItem TextBlock {
+    Foreground: #7a7a7a;
+}
+
+.el-tab1 TabItem[IsSelected=true] TextBlock {
+    Foreground: #409eff;
+}
+
+.el-tab2 #headBorder {
+    /*Background: rgb(245,247,250);*/
+    Width: 100;
+    BorderFill: null;
+}
+
+.el-tab2 TabItem {
+    Width: 100%;
+}
+
+.el-tab2 #headerPanel {
+    Width: 100%;
+    BorderType: BorderThickness;
+    BorderThickness: 0,0,2,0;
+    BorderFill: rgb(220,223,230);
+}
+
+.el-tab2 TabItem > Border {
+    Width: 100%;
+    BorderThickness: 0,0,2,0;
+    BorderFill: rgb(220,223,230);
+}
+
+.el-tab2 TabItem TextBlock {
+    MarginRight: 0;
+}
+
+.el-tab2 TabItem[IsSelected=true] > Border {
+    BorderFill: rgb(64,158,255);
+    Background: rgb(67,74,80);
+}
+
+.el-tab2 TabItem[IsSelected=true] TextBlock {
+    Foreground: #409eff;
+}

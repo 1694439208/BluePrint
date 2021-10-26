@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "蓝图重制版": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false,
+      "authenticationMode": "None"
+    }
+  }
+}
