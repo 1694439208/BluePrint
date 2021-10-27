@@ -16,12 +16,6 @@ namespace 蓝图重制版.BluePrint.INode
         public GetVar(BParent _bParent):base(_bParent) {
             Title = "获取变量值";
             base._IntPutJoin.AddRange(new List<(IJoinControl,Node_Interface_Data)>{
-                (new ExecJoin(bParent, IJoinControl.NodePosition.Left, this),new Node_Interface_Data{
-                    Title = "开始执行的接头",
-                    Value = new JoinType("执行开始"),
-                    Type = typeof(JoinType),
-                    Tips = "开始执行的接头",
-                }),
                 (new TextBoxJoint(bParent, IJoinControl.NodePosition.Left, this){ 
                     Watermark = "变量名",
                     Enabled = false,
@@ -33,12 +27,6 @@ namespace 蓝图重制版.BluePrint.INode
                 })
             });
             base._OutPutJoin.AddRange(new List<(IJoinControl, Node_Interface_Data)>{
-                (new ExecJoin(bParent, IJoinControl.NodePosition.right, this),new Node_Interface_Data{
-                    Title = "执行结束的接头",
-                    Value = new JoinType("执行结束"),
-                    Type = typeof(JoinType),
-                    Tips = "执行结束的接头",
-                }),
                 (new ValueText(bParent, IJoinControl.NodePosition.right, this),new Node_Interface_Data{
                     Title = "变量值",
                     Value = "",
