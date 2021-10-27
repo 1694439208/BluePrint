@@ -53,9 +53,10 @@ namespace 蓝图重制版
 
             //LoadStyleFile("res://蓝图重制版/css/Stylesheet1.css");
             LoadStyleFile("res://蓝图重制版/css/ElementUI1.css");
+            LoadStyleFile("res://蓝图重制版/css/icons.css", true);
             //LoadStyleFile("res://蓝图重制版/css/icons.css", true);
-            
-            
+
+
             //加载样式文件，文件需要设置为内嵌资源
 
             if (!DesignMode)//设计模式下不执行
@@ -79,6 +80,10 @@ namespace 蓝图重制版
                     typeof(ImageSplit),
                     typeof(sequence),
                     typeof(GreaterThan),
+                    typeof(ScriptType),
+                    typeof(CreateVar),
+                    typeof(StrAppend),
+                    typeof(GetVar),
                 });
 
                 bp.bluePrint.AddChildren(new _StartNode(bp)

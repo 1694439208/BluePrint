@@ -113,6 +113,10 @@ namespace 蓝图重制版.BluePrint.Node
         public virtual void SetType(Node_Interface_Data type) {
             JoinType = type.Type;
             IsTypeCheck = type.IsTypeCheck;
+            if (type.Tips != "")
+            {
+                ToolTip = type.Tips;
+            }
         }
         /// <summary>
         /// 读取接口数据类型
@@ -247,6 +251,7 @@ namespace 蓝图重制版.BluePrint.Node
                                                 {nameof(MenuItem.MouseUp),(s1,e1)=>{
                                                     if (_position == NodePosition.Left)
                                                     {
+                                                        
                                                         var lines = this.bParent.bluePrint.FildIutJoin(this);
                                                         foreach (var item in lines)
                                                         {
@@ -323,9 +328,35 @@ namespace 蓝图重制版.BluePrint.Node
                 //B_Join.MarginRight = 0;
             }
         }
+        /// <summary>
+        /// 设置控件连线之后可视true代表连接之后继续显示但禁用，反之false
+        /// </summary>
+        /// <returns></returns>
+        public bool Enabled = true;
+        /// <summary>
+        /// 设置控件禁用
+        /// </summary>
+        /// <param name="ise">false禁用 true反之</param>
+        public void SetEnabled(bool ise) {
+            Body.IsEnabled = ise;
+            if (Enabled)
+            {
+                return;
+            }
+            if (ise)
+            {
+                Body.Visibility = Visibility.Visible;
+            }
+            else {
+                Body.Visibility = Visibility.Hidden;
+            }
+            
+        }
+        private UIElement Body;
         public void AddControl(UIElement control,NodePosition position) {
             if (control)
             {
+                Body = control;
                 B_StackPanel.Children.Add(control);
             }
             if (position == NodePosition.Left)

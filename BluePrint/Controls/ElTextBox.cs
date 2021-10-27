@@ -29,6 +29,7 @@ namespace Hm_Controls
             });
             Children.Add(new TextBlock
             {
+                FontSize = 10,
                 Name = "placeholder",
                 MarginLeft = 10,
                 MarginTop = 5,

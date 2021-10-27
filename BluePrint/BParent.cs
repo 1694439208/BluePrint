@@ -286,7 +286,7 @@ namespace 蓝图重制版.BluePrint
                 }
                 Debug.WriteLine($"{popup.Visibility}");
                 
-                //(popup.Children[0] as SearchMenuItem).close();
+                (popup.Children[0] as SearchMenuItem).close();
                 popup.Show();
                 //var aa = popup.Focus(NavigationMethod.Click);
 
@@ -424,7 +424,8 @@ namespace 蓝图重制版.BluePrint
                                 };
                                 bluePrint.AddLineChildren(bP_Line1);
                                 bP_Line1.SetJoin(a, b);
-
+                                ///连上之后，输入禁用操作
+                                b.SetEnabled(false);
                                 //创建完成让他先刷新一下
                                 bP_Line1.RefreshDrawBezier();
                             }
@@ -456,7 +457,8 @@ namespace 蓝图重制版.BluePrint
                                 };
                                 bluePrint.AddLineChildren(bP_Line1);
                                 bP_Line1.SetJoin(a, b);
-
+                                ///连上之后，输入禁用操作
+                                b.SetEnabled(false);
                                 //创建完成让他先刷新一下
                                 bP_Line1.RefreshDrawBezier();
                             }

@@ -56,6 +56,9 @@
     <Compile Update="BluePrint\IJoin\IJoinControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="BluePrint\Join\VarComboxJoin.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="BluePrint\Node\GreaterThan.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -69,6 +72,18 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="BluePrint\Node\Branch.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\liunx\CreateVar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\liunx\ScriptType.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\liunx\GetVar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\liunx\StrAppend.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="BluePrint\Node\_StartNode.cs">

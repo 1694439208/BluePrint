@@ -1,5 +1,6 @@
 ﻿using CPF.Controls;
 using CPF.Drawing;
+using Hm_Controls;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,14 @@ namespace 蓝图重制版.BluePrint.Node
         public TextBoxJoint(BParent _bParent, NodePosition JoinDir, Control Node) : base(_bParent, JoinDir, Node, Runtime.Token.NodeToken.Value)
         {
             nodePosition = JoinDir;
+        }
+        /// <summary>
+        /// 水印
+        /// </summary>
+        public string Watermark {
+            set {
+                UINode.Placeholder = value;
+            }
         }
 
 
@@ -40,15 +49,16 @@ namespace 蓝图重制版.BluePrint.Node
             textBoxDate.Value = Convert.ChangeType(UINode.Text, GetJoinType());
             return textBoxDate;
         }
-        public TextBox UINode = new TextBox
+        public ElTextBox UINode = new ElTextBox
         {
+            ClipToBounds = true,
             Text = "test",
-            Foreground = Color.FromRgb(255, 255, 255),
+            ///Foreground = Color.FromRgb(255, 255, 255),
             Width = 60,
             //Height = 30,
             //HScrollBarVisibility = ScrollBarVisibility.Hidden,
             //VScrollBarVisibility = ScrollBarVisibility.Hidden,
-            BorderFill = "rgb(220, 220, 220)",
+            ///BorderFill = "rgb(220, 220, 220)",
             //TextAlignment = TextAlignment.Center,
             Classes = { "single" },
             Commands =
@@ -73,7 +83,14 @@ namespace 蓝图重制版.BluePrint.Node
         protected override void InitializeComponent()
         {
             base.InitializeComponent();
-            base.AddControl(UINode, nodePosition);
+            base.AddControl(new Panel
+            {
+                Classes = "el-textbox",
+                Width = "100%",
+                //Height = 27.1f,
+                //MarginTop = 10,
+                Children = {UINode},
+            }, nodePosition);
         }
     }
 }

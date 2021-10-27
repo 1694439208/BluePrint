@@ -40,6 +40,10 @@ namespace 蓝图重制版.BluePrint.Node
             {
                 text1.Text = __value.Value.ToString();
             }
+            if (GetJoinType() == typeof(string))
+            {
+                text1.Text = __value.Value.ToString();
+            }
         }
         public override Node_Interface_Data Get()
         {

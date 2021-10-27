@@ -146,6 +146,10 @@ namespace 蓝图重制版.BluePrint
         /// </summary>
         /// <param name="control"></param>
         public void RemoveLine(Control control) {
+            var line = (BP_Line)control;
+            ((Node.IJoinControl)line.GetEndJoin()).SetEnabled(true);
+
+            //((Node.IJoinControl)line.GetEndJoin()).Focusable = false;
             Instances.Remove(control);
             Children.Remove(control);
             Lines.Remove(control as BP_Line);
