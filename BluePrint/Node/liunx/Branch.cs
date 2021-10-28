@@ -64,16 +64,21 @@ namespace 蓝图重制版.BluePrint.INode
                 _IntPutJoin[i + 1].Item1.Render();
             }
         }
-        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<string> arguments, List<string> result)
+        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<ParameterAST> arguments, List<ParameterAST> result)
         {
-            return $@"
-{PrevNodes.join("\r\n")}
-if({arguments[0]}){{
-    {(Execute.Count >= 1 ? Execute[0] : "")}
-}}else{{
-    {(Execute.Count >= 2 ? Execute[1] : "")}
-}}
-";
+            var ret = Execute.Count switch
+            {
+                1 => $@"if {arguments[0].ID.GetID()}
+then
+    {Execute[0]}",
+                2 => $@"if {arguments[0].ID.GetID()}
+then
+    {Execute[0]}
+else
+    {Execute[1]}",
+                _ => ""
+            };
+            return $"{PrevNodes.join("\r\n")}\r\n{ret}fi"; 
         }
     }
 }

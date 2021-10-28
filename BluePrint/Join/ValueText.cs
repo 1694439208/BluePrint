@@ -36,12 +36,15 @@ namespace 蓝图重制版.BluePrint.Node
             {
                 text1.Text = (__value.Value as Data_Bitmap).Title;
             }
-            if (GetJoinType() == typeof(bool))
+            else if (GetJoinType() == typeof(bool))
             {
                 text1.Text = __value.Value.ToString();
             }
-            if (GetJoinType() == typeof(string))
+            else if (GetJoinType() == typeof(string))
             {
+                text1.Text = __value.Value.ToString();
+            }
+            else {
                 text1.Text = __value.Value.ToString();
             }
         }

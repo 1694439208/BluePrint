@@ -40,7 +40,7 @@ namespace 蓝图重制版.BluePrint.INode
         {
             base.Execute(arguments, result);
         }
-        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<string> arguments, List<string> result)
+        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<ParameterAST> arguments, List<ParameterAST> result)
         {
             return $"{Execute.join("\r\n")}";
             /*return $@"

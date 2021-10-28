@@ -25,8 +25,8 @@ namespace 蓝图重制版.BluePrint.INode
                 }),
                 (new ComboBoxJoin(bParent, IJoinControl.NodePosition.Left, this),new Node_Interface_Data{
                     Title = "脚本类型",
-                    Value = new List<string>{"脚本","自动化脚本"},
-                    Type = typeof(List<string>),
+                    Value = 0,
+                    Type = typeof(int),
                     Tips = "选择脚本类型",
                 }),
             });
@@ -46,11 +46,11 @@ namespace 蓝图重制版.BluePrint.INode
             base.Execute(arguments, result);
         }
 
-        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<string> arguments, List<string> result)
+        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<ParameterAST> arguments, List<ParameterAST> result)
         {
-            return $@"
-{Execute.join("\r\n")}
-";
+            var data = arguments[0].Join.Get().GetData<int>();
+            return $@"{(data == 0 ? "#!/bin/bash" : "#!/usr/bin/expect")}
+{Execute.join("\r\n")}";
         }
     }
 }

@@ -35,14 +35,18 @@ namespace 蓝图重制版.BluePrint.Join
         }
         public override Node_Interface_Data Get()
         {
+            var name = UINode.FindPresenterByName<ElTextBox>("name");
+            var value = UINode.FindPresenterByName<ElTextBox>("value");
+            dataDate.Value = (UINode.ComboBox1.SelectedIndex, name.Text, value.Text);
             return dataDate;
         }
         public override void Render()
         {
             if (GetJoinType() == typeof(List<string>))
             {
-                UINode.ComboBox1.Items = (List<string>)dataDate.Value;
-                UINode.ComboBox1.SelectedIndex = 0;
+                //UINode.ComboBox1.Items = (List<string>)dataDate.Value;
+                (int typeindex, string name, string value) test = ((int typeindex, string name, string value))dataDate.Value;
+                UINode.ComboBox1.SelectedIndex = test.typeindex;
                 //UINode.Content = dataDate.Title;
             }
         }
@@ -64,11 +68,7 @@ namespace 蓝图重制版.BluePrint.Join
             MarginLeft = 2f,
             MarginTop = 1f,
             SelectedIndex = 0,
-            Items =
-            {
-                "test",
-                "test1",
-            }
+            Items =new List<string> { "字符串", "整数" }
         };
         protected override void InitializeComponent()
         {
@@ -86,7 +86,7 @@ namespace 蓝图重制版.BluePrint.Join
                         Children = {
                             new ElTextBox
                             {
-                                Name = "SearchElTextBox",
+                                Name = "name",
                                 PresenterFor = this,
                                 MarginLeft = 2f,
                                 Placeholder = "变量名",
@@ -102,7 +102,7 @@ namespace 蓝图重制版.BluePrint.Join
                         Children = {
                             new ElTextBox
                             {
-                                Name = "SearchElTextBox",
+                                Name = "value",
                                 PresenterFor = this,
                                 MarginLeft = 2f,
                                 Placeholder = "变量值",

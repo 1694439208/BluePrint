@@ -7,6 +7,10 @@ namespace 蓝图重制版.BluePrint.Runtime
     public class NodeAst
     {
         /// <summary>
+        /// 当前接口指针是否指向自己
+        /// </summary>
+        public bool Isthis { set; get; }
+        /// <summary>
         /// 指向了vm Context的指针，用于模拟堆栈
         /// </summary>
         public int NodeJoinId { set; get; }

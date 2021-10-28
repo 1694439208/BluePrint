@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using 蓝图重制版.BluePrint.IJoin;
 using 蓝图重制版.BluePrint.Node;
+using System.Linq;
 
 namespace 蓝图重制版.BluePrint.INode
 {
@@ -70,11 +71,13 @@ namespace 蓝图重制版.BluePrint.INode
             base.Execute(arguments, result);
         }
 
-        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<string> arguments, List<string> result)
+        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<ParameterAST> arguments, List<ParameterAST> result)
         {
-            return $@"
-{Execute.join("\r\n")}
-";
+            //如果当前接口有指针指向那就读取指针生成变量，如果没有那就读取当前接口值处理
+            var str = string.Join("", arguments.Select(a => { return $"{(a.IsThis ? a.Join.Get().GetData<string>() : $"${{{a.ID.GetID(false)}}}")}"; }).ToArray());
+            return $@"{PrevNodes.join("\r\n")}
+{result[0].ID.GetID(false)}=""{str}""
+{Execute.join("\r\n")}";
         }
     }
 }

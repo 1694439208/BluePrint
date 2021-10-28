@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using 蓝图重制版.BluePrint.IJoin;
 
 namespace 蓝图重制版.BluePrint.Runtime
 {
@@ -28,15 +29,24 @@ namespace 蓝图重制版.BluePrint.Runtime
                     {
                         NextNodesCode.Add(Calculated(item));
                     }
-                    List<string> Arguments = new List<string>();
+                    List<ParameterAST> Arguments = new List<ParameterAST>();
                     foreach (var item in nodeAst.Arguments)
                     {
-                        Arguments.Add($"temp_{item.NodeJoinId}");
+                        Arguments.Add(new ParameterAST {
+                            ID = item.NodeJoinId, 
+                            Join = item.Join,
+                            IsThis = item.Isthis,
+                        });
                     }
-                    List<string> Results = new List<string>();
+                    List<ParameterAST> Results = new List<ParameterAST>();
                     foreach (var item in nodeAst.Results)
                     {
-                        Results.Add($"temp_{item.NodeJoinId}");
+                        Results.Add(new ParameterAST
+                        {
+                            ID = item.NodeJoinId,
+                            Join = item.Join,
+                            IsThis = item.Isthis,
+                        });
                     }
 
                     List<string> PrevNodes = new List<string>();

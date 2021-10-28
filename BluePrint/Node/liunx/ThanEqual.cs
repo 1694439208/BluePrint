@@ -7,15 +7,15 @@ using 蓝图重制版.BluePrint.Node;
 
 namespace 蓝图重制版.BluePrint.INode
 {
-    [NodeBaseInfo("大于 >", "逻辑运算")]
-    public class GreaterThan : NodeBase
+    [NodeBaseInfo("等于 ==", "数值逻辑运算")]
+    public class ThanEqual : NodeBase
     {
         protected override void InitializeComponent()
         {
             base.InitializeComponent();
         }
-        public GreaterThan(BParent _bParent):base(_bParent) {
-            Title = "大于 >";
+        public ThanEqual(BParent _bParent):base(_bParent) {
+            Title = "等于 ==";
             base._IntPutJoin.AddRange(new List<(IJoinControl,Node_Interface_Data)>{
                 (new TextBoxJoint(bParent, IJoinControl.NodePosition.Left, this),new Node_Interface_Data{
                     Title = "整数类型",
@@ -59,12 +59,11 @@ namespace 蓝图重制版.BluePrint.INode
             }
         }
 
-        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<string> arguments, List<string> result)
+        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<ParameterAST> arguments, List<ParameterAST> result)
         {
             return $@"
 {PrevNodes.join("\r\n")}
-{result[0]} = {arguments[0]} > {arguments[1]};
-";
+{result[0].ID.GetID(false)}=[{arguments[0].GetData(a => a.Value)} == {arguments[1].GetData(a => a.Value)}]";
         }
     }
 }

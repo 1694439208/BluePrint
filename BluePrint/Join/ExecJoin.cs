@@ -89,7 +89,7 @@ namespace 蓝图重制版.BluePrint.IJoin
                     //(_Node as Context).Execute();
                     var a = new Runtime.NodeParse(bParent);
                     var ast = a.Parser(_Node as NodeBase);
-                    Runtime.Evaluate.Eval(ast);
+                    //Runtime.Evaluate.Eval(ast);
                     var code = Runtime.CodeGenerator.Generator(ast);
                     System.Diagnostics.Debug.WriteLine(code);
                 };

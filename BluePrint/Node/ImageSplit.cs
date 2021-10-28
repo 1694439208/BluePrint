@@ -122,7 +122,7 @@ namespace 蓝图重制版.BluePrint.INode
             //输出默认
             base.Execute(arguments, result);
         }
-        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<string> arguments, List<string> result)
+        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<ParameterAST> arguments, List<ParameterAST> result)
         {
             return $@"
 {PrevNodes.join("\r\n")}

@@ -26,5 +26,13 @@ namespace 蓝图重制版.BluePrint.IJoin
         /// 数据
         /// </summary>
         public Object Value { set; get; }
+        /// <summary>
+        /// 获取指定类型数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T GetData<T>() {
+            return (T)Value;
+        }
     }
 }

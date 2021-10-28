@@ -64,7 +64,7 @@ namespace 蓝图重制版.BluePrint.INode
         /// <param name="arguments">参数变量名数组</param>
         /// <param name="result">返回的变量数组</param>
         /// <returns></returns>
-        public virtual string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<string> arguments, List<string> result)
+        public virtual string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<ParameterAST> arguments, List<ParameterAST> result)
         {
             return "";
         }

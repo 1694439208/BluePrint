@@ -63,9 +63,9 @@ namespace 蓝图重制版.BluePrint.INode
             base.Execute(arguments, result);
         }
 
-        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<string> arguments, List<string> result)
+        public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<ParameterAST> arguments, List<ParameterAST> result)
         {
-            var ret = $@"{PrevNodes.join("\r\n")}打印({arguments[0]});{Execute.join("\r\n")}";
+            var ret = $@"{PrevNodes.join("\r\n")}打印({arguments[0].ID.GetID()});{Execute.join("\r\n")}";
             return ret;
         }
     }

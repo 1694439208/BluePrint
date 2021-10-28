@@ -15,6 +15,16 @@ namespace 蓝图重制版.BluePrint.IJoin
         {
             return (T)(element[name]);
         }
+        /// <summary>
+        /// 获取id变量名
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="IsD">是否加入前缀表示使用变量</param>
+        /// <returns></returns>
+        public static string GetID(this int element, bool IsD = true)
+        {
+            return $"{(IsD ? "$" : "")}temp_{element}";
+        }
         public static string join(this List<string> element, string str)
         {
             return string.Join(str, element.Where(a => a != "").ToList());

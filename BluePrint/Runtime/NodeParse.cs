@@ -43,6 +43,8 @@ namespace 蓝图重制版.BluePrint.Runtime
                                 {
                                     NodeToken = Token.NodeToken.Expression,
                                     NodeJoinId = Join.GetHashCode(),//当前输入引用输出的指针
+                                    Join = Join,
+                                    Isthis = false,
                                 });
                             }
                             else
@@ -53,6 +55,8 @@ namespace 蓝图重制版.BluePrint.Runtime
                                     NodeToken = Token.NodeToken.Expression,
                                     NodeJoinId = Join.GetHashCode(),//当前输入引用输出的指针
                                     PrevNodes = { Parser(Prev as INode.NodeBase) },
+                                    Join = Join,
+                                    Isthis = false,
                                 });
                             }
                         }
@@ -64,6 +68,7 @@ namespace 蓝图重制版.BluePrint.Runtime
                             NodeToken = Token.NodeToken.Value,
                             NodeJoinId = item.Item1.GetHashCode(),//当前输入引用输出的指针
                             Join = item.Item1,
+                            Isthis = true,
                         });
                     }
                     
@@ -90,6 +95,7 @@ namespace 蓝图重制版.BluePrint.Runtime
                     ast.Results.Add(new NodeAst { 
                         NodeToken = Token.NodeToken.Value,
                         NodeJoinId = item.Item1.GetHashCode(),
+                        Join = item.Item1,
                     });
                 }
             }

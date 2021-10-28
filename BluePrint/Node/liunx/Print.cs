@@ -7,22 +7,29 @@ using 蓝图重制版.BluePrint.Node;
 
 namespace 蓝图重制版.BluePrint.INode
 {
-    [NodeBaseInfo("创建变量", "LiunxScript")]
-    public class CreateVar : NodeBase
+    [NodeBaseInfo("打印", "LiunxScript")]
+    public class Print : NodeBase
     {
         protected override void InitializeComponent()
         {
             base.InitializeComponent();
         }
-        public CreateVar(BParent _bParent):base(_bParent) {
-            Title = "创建变量";
+        public Print(BParent _bParent):base(_bParent) {
+            Title = "打印";
             base._IntPutJoin.AddRange(new List<(IJoinControl,Node_Interface_Data)>{
                 (new ExecJoin(bParent, IJoinControl.NodePosition.Left, this),new Node_Interface_Data{
                     Title = "开始执行的接头",
                     Value = new JoinType("执行开始"),
                     Type = typeof(JoinType),
                     Tips = "test",
-                })
+                }),
+                (new ValueText(bParent, IJoinControl.NodePosition.Left, this),new Node_Interface_Data{
+                    Title = "变量类型",
+                    Value = "",
+                    Type = typeof(object),
+                    Tips = "打印的变量",
+                    IsTypeCheck = false,
+                }),
             });
             base._OutPutJoin.AddRange(new List<(IJoinControl, Node_Interface_Data)>{
                 (new ExecJoin(bParent, IJoinControl.NodePosition.right, this),new Node_Interface_Data{
@@ -30,13 +37,7 @@ namespace 蓝图重制版.BluePrint.INode
                     Value = new JoinType("执行结束"),
                     Type = typeof(JoinType),
                     Tips = "test",
-                }),
-                (new VarComboxJoin(bParent, IJoinControl.NodePosition.right, this),new Node_Interface_Data{
-                    Title = "变量类型",
-                    Value = (0,"",""),
-                    Type = typeof((int typeindex,string name,string value)),
-                    Tips = "输出变量名",
-                }),
+                })
             });
         }
 
@@ -48,11 +49,9 @@ namespace 蓝图重制版.BluePrint.INode
 
         public override string CodeTemplate(List<string> Execute, List<string> PrevNodes, List<ParameterAST> arguments, List<ParameterAST> result)
         {
-            var data = result[0].Join.Get().GetData<(int typeindex, string name, string value)>();
-            return $@"{data.name}={(data.typeindex == 0 ? $"\"{data.value}\"" : data.value)}
-{result[0].ID.GetID(false)}=${{{data.name}}}
-{Execute.join("\r\n")}";  
-            
+            return $@"{PrevNodes.join("\r\n")}
+echo ${{{arguments[0].ID.GetID(false)}}}
+{Execute.join("\r\n")}";
         }
     }
 }

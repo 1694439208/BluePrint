@@ -51,11 +51,7 @@ namespace 蓝图重制版.BluePrint.Join
             Height = 24f,
             Width = 123.2f,
             SelectedIndex = 0,
-            Items =
-            {
-                "test",
-                "test1",
-            }
+            Items = new List<string> { "脚本", "自动化脚本" }
         };
 
 

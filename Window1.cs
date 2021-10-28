@@ -79,11 +79,15 @@ namespace 蓝图重制版
                     typeof(ImageShow),
                     typeof(ImageSplit),
                     typeof(sequence),
-                    typeof(GreaterThan),
+                    typeof(ThanGreater),
                     typeof(ScriptType),
                     typeof(CreateVar),
                     typeof(StrAppend),
                     typeof(GetVar),
+                    typeof(Print),
+                    typeof(ThanEqual),
+                    typeof(ThanLess),
+                    typeof(ThanStrEqual),
                 });
 
                 bp.bluePrint.AddChildren(new _StartNode(bp)
@@ -91,7 +95,7 @@ namespace 蓝图重制版
                     MarginTop = 0,
                     MarginLeft = 0,
                 });
-                bp.bluePrint.AddChildren(new ImageSplit(bp)
+                /*bp.bluePrint.AddChildren(new ImageSplit(bp)
                 {
                     MarginTop = 0,
                     MarginLeft = 0,
@@ -113,7 +117,7 @@ namespace 蓝图重制版
                 {
                     MarginTop = 0,
                     MarginLeft = 0,
-                });
+                });*/
 
                 //var line = new BP_Line ImageShow
                 //{
