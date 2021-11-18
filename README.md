@@ -3,6 +3,12 @@
 
 > 基于[CPF](http://cpf.cskin.net/) 框架开发的一款类似于蓝图的组件 
 
+<iframe 
+    src='image\df019cda2763dfaa3b108caac3fa4951.mp4' 
+    frameborder=0 
+    'allowfullscreen'>
+</iframe>
+
 >> 先放几张图
 
 ![](image/微信图片_20211118175208.png)
