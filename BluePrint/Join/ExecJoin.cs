@@ -8,6 +8,12 @@ using System.Text;
 using 蓝图重制版.BluePrint.INode;
 using 蓝图重制版.BluePrint.Node;
 
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
+
 namespace 蓝图重制版.BluePrint.IJoin
 {
     
@@ -92,6 +98,7 @@ namespace 蓝图重制版.BluePrint.IJoin
                     //Runtime.Evaluate.Eval(ast);
                     var code = Runtime.CodeGenerator.Generator(ast);
                     System.Diagnostics.Debug.WriteLine(code);
+                    //ToSZArray
                 };
             }
             base.AddControl(UINode, nodePosition);

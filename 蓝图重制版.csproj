@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <ApplicationIcon />
     <StartupObject />
@@ -57,6 +57,18 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="BluePrint\Join\VarComboxJoin.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\JsLiunx\CallShell.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\JsLiunx\FindText.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\JsLiunx\sequence.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BluePrint\Node\JsLiunx\_StartNode.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="BluePrint\Node\liunx\ThanStrEqual.cs">

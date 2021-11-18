@@ -1,4 +1,5 @@
-﻿using CPF.Controls;
+﻿using CPF;
+using CPF.Controls;
 using CPF.Drawing;
 using Hm_Controls;
 using System;
@@ -49,12 +50,12 @@ namespace 蓝图重制版.BluePrint.Node
             textBoxDate.Value = Convert.ChangeType(UINode.Text, GetJoinType());
             return textBoxDate;
         }
+        public FloatField width = 80;
         public ElTextBox UINode = new ElTextBox
         {
             ClipToBounds = true,
             Text = "test",
             ///Foreground = Color.FromRgb(255, 255, 255),
-            Width = 60,
             //Height = 30,
             //HScrollBarVisibility = ScrollBarVisibility.Hidden,
             //VScrollBarVisibility = ScrollBarVisibility.Hidden,
@@ -83,6 +84,7 @@ namespace 蓝图重制版.BluePrint.Node
         protected override void InitializeComponent()
         {
             base.InitializeComponent();
+            UINode.Width = width;
             base.AddControl(new Panel
             {
                 Classes = "el-textbox",

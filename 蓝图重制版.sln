@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "..\Wind
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "蓝图控件测试", "..\蓝图控件测试\蓝图控件测试.csproj", "{57A224BA-072F-469D-BD7D-B13210E35316}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "liunx批量管理", "..\liunx批量管理\liunx批量管理.csproj", "{ED23F005-5F68-4CE3-B4B2-A4D58AD0721F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Html2Cpf_Demo", "E:\新建文件夹\repos\CPF蓝图\CPF测试案例源码1\CPFApplication1\Html2Cpf_Demo\Html2Cpf_Demo.csproj", "{322CF193-C2F9-40D2-AF3A-C3822658211D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "测试", "..\测试\测试.csproj", "{A6A5CA66-E809-42C2-B367-D6EA55DF0326}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +67,30 @@ Global
 		{57A224BA-072F-469D-BD7D-B13210E35316}.test|Any CPU.Build.0 = Debug|Any CPU
 		{57A224BA-072F-469D-BD7D-B13210E35316}.类库d|Any CPU.ActiveCfg = 类库d|Any CPU
 		{57A224BA-072F-469D-BD7D-B13210E35316}.类库d|Any CPU.Build.0 = 类库d|Any CPU
+		{ED23F005-5F68-4CE3-B4B2-A4D58AD0721F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED23F005-5F68-4CE3-B4B2-A4D58AD0721F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED23F005-5F68-4CE3-B4B2-A4D58AD0721F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED23F005-5F68-4CE3-B4B2-A4D58AD0721F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED23F005-5F68-4CE3-B4B2-A4D58AD0721F}.test|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED23F005-5F68-4CE3-B4B2-A4D58AD0721F}.test|Any CPU.Build.0 = Debug|Any CPU
+		{ED23F005-5F68-4CE3-B4B2-A4D58AD0721F}.类库d|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED23F005-5F68-4CE3-B4B2-A4D58AD0721F}.类库d|Any CPU.Build.0 = Debug|Any CPU
+		{322CF193-C2F9-40D2-AF3A-C3822658211D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{322CF193-C2F9-40D2-AF3A-C3822658211D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{322CF193-C2F9-40D2-AF3A-C3822658211D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{322CF193-C2F9-40D2-AF3A-C3822658211D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{322CF193-C2F9-40D2-AF3A-C3822658211D}.test|Any CPU.ActiveCfg = Debug|Any CPU
+		{322CF193-C2F9-40D2-AF3A-C3822658211D}.test|Any CPU.Build.0 = Debug|Any CPU
+		{322CF193-C2F9-40D2-AF3A-C3822658211D}.类库d|Any CPU.ActiveCfg = Debug|Any CPU
+		{322CF193-C2F9-40D2-AF3A-C3822658211D}.类库d|Any CPU.Build.0 = Debug|Any CPU
+		{A6A5CA66-E809-42C2-B367-D6EA55DF0326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6A5CA66-E809-42C2-B367-D6EA55DF0326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6A5CA66-E809-42C2-B367-D6EA55DF0326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6A5CA66-E809-42C2-B367-D6EA55DF0326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6A5CA66-E809-42C2-B367-D6EA55DF0326}.test|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6A5CA66-E809-42C2-B367-D6EA55DF0326}.test|Any CPU.Build.0 = Debug|Any CPU
+		{A6A5CA66-E809-42C2-B367-D6EA55DF0326}.类库d|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6A5CA66-E809-42C2-B367-D6EA55DF0326}.类库d|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

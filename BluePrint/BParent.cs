@@ -169,6 +169,7 @@ namespace 蓝图重制版.BluePrint
         }
 
         float scale = 1;
+        float scale_value = 0.99f;
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             Parent.Invalidate();
@@ -180,20 +181,20 @@ namespace 蓝图重制版.BluePrint
             }
             if (e.Delta.Y < 0)
             {
-                scale *= 0.8f;
+                scale *= scale_value;
                 if (scale < 0.01)
                 {
-                    scale /= 0.8f;
+                    scale /= scale_value;
                 }
                 else
                 {
-                    matrix.ScaleAtPrepend(0.8f, 0.8f, p.X, p.Y);
+                    matrix.ScaleAtPrepend(scale_value, scale_value, p.X, p.Y);
                 }
             }
             else
             {
-                scale /= 0.8f;
-                matrix.ScaleAtPrepend(1 / 0.8f, 1 / 0.8f, p.X, p.Y);
+                scale /= scale_value;
+                matrix.ScaleAtPrepend(1 / scale_value, 1 / scale_value, p.X, p.Y);
             }
             bluePrint.RenderTransform = new MatrixTransform(matrix);
             base.OnMouseWheel(e);
@@ -497,13 +498,15 @@ namespace 蓝图重制版.BluePrint
                 bP_Line.Invalidate();
                 bP_Line.RefreshDrawBezier();
 
-                var p1 = e.MouseDevice.GetPosition(bluePrint);
+                /*var p1 = e.MouseDevice.GetPosition(bluePrint);
                 MouseJoin.MarginLeft = p1.X;
-                MouseJoin.MarginTop = p1.Y;
+                MouseJoin.MarginTop = p1.Y;*/
                 
                 //Debug.WriteLine($"e.Location11:{p}--{e.Location}");
             }
-            
+            var p1 = e.MouseDevice.GetPosition(bluePrint);
+            MouseJoin.MarginLeft = p1.X;
+            MouseJoin.MarginTop = p1.Y;
             if (mousePos.HasValue)
             {
                 //bluePrint.MarginLeft
