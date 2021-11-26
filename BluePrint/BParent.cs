@@ -264,6 +264,7 @@ namespace 蓝图重制版.BluePrint
                         MarginTop = -10,
                         //MarginLeft = -10,
                         Background = null,
+                        
                         Children =
                         {
                             new SearchMenuItem(NodeContextTypes,this),

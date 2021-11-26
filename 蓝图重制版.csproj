@@ -41,13 +41,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xhm.CPF" Version="0.9.4.2" />
-    <PackageReference Include="Xhm.CPF.Windows" Version="0.9.4.2" />
+    <PackageReference Include="Xhm.CPF" Version="0.9.5" />
+    <PackageReference Include="Xhm.CPF.Windows" Version="0.9.5" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
-    <PackageReference Include="Xhm.CPF.Skia" Version="0.9.4.2" />
-    <PackageReference Include="Xhm.CPF.Mac" Version="0.9.4.2" />
-    <PackageReference Include="Xhm.CPF.Linux" Version="0.9.4.2" />
+    <PackageReference Include="Xhm.CPF.Skia" Version="0.9.5" />
+    <PackageReference Include="Xhm.CPF.Mac" Version="0.9.5" />
+    <PackageReference Include="Xhm.CPF.Linux" Version="0.9.5" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="BluePrint\Controls\ElTextBox.cs">

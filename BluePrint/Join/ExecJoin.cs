@@ -93,12 +93,14 @@ namespace 蓝图重制版.BluePrint.IJoin
                 };
                 (UINode as Button).Click += (s, e) => {
                     //(_Node as Context).Execute();
-                    var a = new Runtime.NodeParse(bParent);
-                    var ast = a.Parser(_Node as NodeBase);
-                    //Runtime.Evaluate.Eval(ast);
-                    var code = Runtime.CodeGenerator.Generator(ast);
-                    System.Diagnostics.Debug.WriteLine(code);
+                    //var a = new Runtime.NodeParse(bParent);
+                    //var ast = a.Parser(_Node as NodeBase);
+                    ////Runtime.Evaluate.Eval(ast);
+                    //var code = Runtime.CodeGenerator.Generator(ast);
+                    //System.Diagnostics.Debug.WriteLine(code);
                     //ToSZArray
+
+                    CPF.Skia.SkiaPdf.CreatePdf(Root,"蓝图.pdf");
                 };
             }
             base.AddControl(UINode, nodePosition);
