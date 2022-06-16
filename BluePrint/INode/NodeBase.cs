@@ -42,12 +42,18 @@ namespace 蓝图重制版.BluePrint.INode
                 value = _OutPutJoin;
             }
         }
+
+        /// <summary>
+        /// 序列化用的id
+        /// </summary>
+        public int ID { set; get; }
         /// <summary>
         /// 计算节点
         /// </summary>
-        /// <param name="arguments"></param>
-        /// <param name="result"></param>
-        public virtual void Execute(List<object> arguments, in Runtime.Evaluate.Result result) {
+        /// <param name="Context">执行上下文</param>
+        /// <param name="arguments">参数</param>
+        /// <param name="result">返回</param>
+        public virtual void Execute(object Context,List<object> arguments, in Runtime.Evaluate.Result result) {
 
 
             //默认动作 ，输出所有连接
@@ -157,6 +163,7 @@ if({arguments[0]} > {arguments[1]}){{
         protected override void OnLayoutUpdated()
         {
             base.OnLayoutUpdated();
+            RefreshDrawBezier();
             //IsKeyboardFocusWithin
         }
         public string Title = "";
@@ -189,6 +196,7 @@ if({arguments[0]} > {arguments[1]}){{
                 OuPutIJoin.Children.Add(item.Item1);*/
                 AddOntPut(item);
             }
+            InvalidateArrange();
         }
         /// <summary>
         /// 添加输入节点
@@ -224,6 +232,20 @@ if({arguments[0]} > {arguments[1]}){{
             else {
                 InPutIJoin.Children.Add(JoinControl.Item1);
             }  
+        }
+        public void ClearIntPut()
+        {
+            foreach (var item in InPutIJoin.Children.Where(a => a is IJoinControl).ToArray())
+            {
+                InPutIJoin.Children.Remove(item);
+            }
+        }
+        public void ClearOntPut()
+        {
+            foreach (var item in OuPutIJoin.Children.Where(a => a is IJoinControl).ToArray())
+            {
+                OuPutIJoin.Children.Remove(item);
+            }
         }
         /// <summary>
         /// 添加输入节点
@@ -310,7 +332,17 @@ if({arguments[0]} > {arguments[1]}){{
         private bool isclick = false;
         protected override void OnMouseMove(MouseEventArgs e)
         {
+            base.OnMouseMove(e);
             //e.Handled = true;
+            if (e == null)
+            {
+                RefreshDrawBezier();
+                //为了刷新溢出了的线条
+                Parent.Parent.Invalidate();
+                MarginLeft += 1;
+                MarginTop += 1;
+                return;
+            }
             if (e.LeftButton == MouseButtonState.Pressed && isclick)
             {
                 RefreshDrawBezier();
@@ -322,7 +354,6 @@ if({arguments[0]} > {arguments[1]}){{
                 // TransformPoint
                 
             }
-            base.OnMouseMove(e);
             
         }
         /// <summary>
@@ -334,8 +365,8 @@ if({arguments[0]} > {arguments[1]}){{
                 var lines = bParent.bluePrint.FildIutJoin(item.Item1);
                 foreach (var line in lines)
                 {
-                    line.Invalidate();
                     line.RefreshDrawBezier();
+                    line.Invalidate();
                 }
             }
             foreach (var item in _OutPutJoin)
@@ -343,11 +374,14 @@ if({arguments[0]} > {arguments[1]}){{
                 var lines = bParent.bluePrint.FildOutJoin(item.Item1);
                 foreach (var line in lines)
                 {
-                    line.Invalidate();
                     line.RefreshDrawBezier();
+                    line.Invalidate();
                 }
             }
         }
+
+        
+
         public enum NodePosition
         {
             Left, right

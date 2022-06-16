@@ -27,6 +27,10 @@ namespace 蓝图重制版.BluePrint.IJoin
         /// </summary>
         public Object Value { set; get; }
         /// <summary>
+        /// 接口类参数
+        /// </summary>
+        public Dictionary<string,object> ClassValue { set; get; }
+        /// <summary>
         /// 获取指定类型数据
         /// </summary>
         /// <typeparam name="T"></typeparam>

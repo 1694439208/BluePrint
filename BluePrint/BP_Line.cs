@@ -74,6 +74,8 @@ namespace 蓝图重制版.BluePrint
                 // IJoinControl.NodePosition
                 Point Spos = _Star.GetPosition(_Star.GetJoinPos(_Star.GetDir()), Parent);
                 Point SEnd = _End.GetPosition(_End.GetJoinPos(_End.GetDir()), Parent);
+
+                //Debug.WriteLine($"star:{Spos},end:{SEnd}");
                 /*if (Spos.X < 0|| Spos .Y<0 || SEnd.X < 0|| SEnd.Y<0)
                 {
                     //Debug.WriteLine($"pos:Spos:{Spos}-SEnd:{SEnd}");
@@ -151,6 +153,13 @@ namespace 蓝图重制版.BluePrint
         }
         private IJoinControl _Star = null;
         private IJoinControl _End = null;
+        public IJoinControl GetStar() {
+            return _Star;
+        }
+        public IJoinControl GetEnd()
+        {
+            return _End;
+        }
         private PathGeometry geometry;
         public void SetJoin(IJoinControl a, IJoinControl b)
         {

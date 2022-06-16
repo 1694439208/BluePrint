@@ -72,15 +72,7 @@ namespace 蓝图重制版.BluePrint
         {
             return Lines.Where(x => x.GetStarJoin() == Star&&x.GetEndJoin() == End).Count() > 0;
         }
-        /// <summary>
-        /// 查询输出接口的所有线条引用
-        /// </summary>
-        /// <param name="Star"></param>
-        /// <returns></returns>
-        public List<BP_Line> FildOutJoin(Control Star)
-        {
-            return Lines.Where(x => x.GetStarJoin() == Star).ToList();
-        }
+        
         /// <summary>
         /// 查询接口是否已经有引用
         /// </summary>
@@ -99,6 +91,24 @@ namespace 蓝图重制版.BluePrint
             else {
                 return false;
             }
+        }
+        /// <summary>
+        /// 查询接口的所有线条引用
+        /// </summary>
+        /// <param name="Star"></param>
+        /// <returns></returns>
+        public List<BP_Line> FildJoin(Control join)
+        {
+            return Lines.Where(x => x.GetStarJoin() == join || x.GetEndJoin() == join).ToList();
+        }
+        /// <summary>
+        /// 查询输出接口的所有线条引用
+        /// </summary>
+        /// <param name="Star"></param>
+        /// <returns></returns>
+        public List<BP_Line> FildOutJoin(Control Star)
+        {
+            return Lines.Where(x => x.GetStarJoin() == Star).ToList();
         }
         /// <summary>
         /// 查询输入接口的所有线条引用
@@ -158,10 +168,17 @@ namespace 蓝图重制版.BluePrint
         /// 所有节点的列表记录
         /// </summary>
         List<Control> Instances = new List<Control>();
+        public List<Control> GetChildrenList() {
+            return Instances;
+        }
         /// <summary>
         /// 蓝图内所有节点的线
         /// </summary>
         List<BP_Line> Lines = new List<BP_Line>();
+        public List<BP_Line> GetLinesList()
+        {
+            return Lines;
+        }
 
         protected override void InitializeComponent()
         {

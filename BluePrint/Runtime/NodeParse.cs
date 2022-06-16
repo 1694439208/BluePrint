@@ -87,6 +87,11 @@ namespace 蓝图重制版.BluePrint.Runtime
                         var nextnode = (item1.GetEndJoin() as IJoinControl).Get_NodeRef();
                         ast.NextNodes.Add(Parser(nextnode as INode.NodeBase));
                     }
+                    if (line.Count <= 0)
+                    {
+                        //如果没有那就设置为null
+                        ast.NextNodes.Add(null);
+                    }
                 }
                 //如果类型是参数
                 if (item.Item1.GetNodeType() == Token.NodeToken.Value)

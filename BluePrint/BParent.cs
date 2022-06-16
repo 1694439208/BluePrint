@@ -24,6 +24,38 @@ namespace 蓝图重制版.BluePrint
             _NodeTypes = context;
         }
         /// <summary>
+        /// 在蓝图0，0位置创建一个指定类型的节点
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public Control CreateNode(Type type, float x1 = 0, float y1 = 0)
+        {
+            Control control = null;
+            if (_NodeTypes != null)
+            {
+                foreach (var item in _NodeTypes.Where(x => x == type).ToList())
+                {
+                    var Control = System.Activator.CreateInstance(item, new object[] { this });
+                    (Control as UIElement).Margin = $"{x1},{y1},auto,auto";
+                    bluePrint.AddChildren((CPF.Controls.Control)Control);
+                    control = (CPF.Controls.Control)Control;
+                }
+            }
+            return control;
+        }
+        /// <summary>
+        /// 创建一个接头
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public IJoinControl CreateJoin(Type type, IJoinControl.NodePosition position, NodeBase node)
+        {
+            var Control = System.Activator.CreateInstance(type, new object[] { this, position, node });//,new object[] { this, position, node }
+            return (IJoinControl)Control;
+        }
+        /// <summary>
         /// 在蓝图指定位置创建一个指定类型的节点
         /// </summary>
         /// <param name="type">节点类型</param>
@@ -41,24 +73,253 @@ namespace 蓝图重制版.BluePrint
                 }
             }
         }
-        /// <summary>
-        /// 在蓝图0，0位置创建一个指定类型的节点
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void CreateNode(Type type,float x1 = 0,float y1 = 0)
+        public struct BPNodeType
         {
-            if (_NodeTypes != null)
+            /// <summary>
+            /// 节点类型
+            /// </summary>
+            public Type node { set; get; }
+        }
+        public struct BPPutJoin
+        {
+            /// <summary>
+            /// 序列化用的id
+            /// </summary>
+            public IJoinControl.NodePosition Position { set; get; }
+            /// <summary>
+            /// 序列化用的id
+            /// </summary>
+            public int ID { set; get; }
+            /// <summary>
+            /// 接头类型
+            /// </summary>
+            public Type type { set; get; }
+            /// <summary>
+            /// 接头类内参数
+            /// </summary>
+            public Dictionary<string, object> PropretyValue { set; get; }
+            /// <summary>
+            /// 接头需要的数据
+            /// </summary>
+            public Node_Interface_Data Data { set; get; }
+        }
+        public struct BPNodedata {
+            /// <summary>
+            /// 序列化用的id
+            /// </summary>
+            public int ID { set; get; }
+            /// <summary>
+            /// 位置
+            /// </summary>
+            public Point Point { set; get; }
+            /// <summary>
+            /// 节点
+            /// </summary>
+            public BPNodeType node { set; get; }
+            /// <summary>
+            /// 节点的输出数据
+            /// </summary>
+            public List<BPPutJoin> _OutPutJoin {set;get;}
+            /// <summary>
+            /// 节点的输入数据
+            /// </summary>
+            public List<BPPutJoin> _IntPutJoin { set; get; }
+        }
+        public struct BPJoindata
+        {
+            /// <summary>
+            /// 执行线的头节点
+            /// </summary>
+            public List<int> _Star { set; get; }
+            /// <summary>
+            /// 执行线的尾节点
+            /// </summary>
+            public List<int> _End { set; get; }
+        }
+        public struct BPByte
+        {
+            /// <summary>
+            /// 节点列表
+            /// </summary>
+            public List<BPNodedata> NodeList { set; get; }
+            /// <summary>
+            /// 执行线列表
+            /// </summary>
+            public List<BPJoindata> JoinList { set; get; }
+        }
+
+        public void Deserialize(BPByte data) {
+            //数据反序列化到蓝图
+            List<KeyValuePair<int, KeyValuePair<int, IJoinControl>>> keyValues = new List<KeyValuePair<int, KeyValuePair<int, IJoinControl>>>();
+            List<NodeBase> controlList = new List<NodeBase>();
+            foreach (var item in data.NodeList)
             {
-                foreach (var item in _NodeTypes.Where(x => x == type).ToList())
+                var control = CreateNode(item.node.node,item.Point.X, item.Point.Y);
+                if (control == null)
                 {
-                    var Control = System.Activator.CreateInstance(item, new object[] { this });
-                    (Control as UIElement).Margin = $"{x1-60},{y1},auto,auto";
-                    bluePrint.AddChildren((CPF.Controls.Control)Control);
+                    continue;
+                }
+                var basenode = control as NodeBase;
+                controlList.Add(basenode);
+                basenode.ID = item.ID;
+                //反序列化创建的 把他输入输出都删掉重新创建
+                basenode._IntPutJoin.Clear();
+                basenode.ClearIntPut();
+                basenode._OutPutJoin.Clear();
+                basenode.ClearOntPut();
+                //然后再重新创建
+                foreach (var item1 in item._IntPutJoin)
+                {
+                    var join = CreateJoin(item1.type, item1.Position, basenode);
+                    join.ID = item1.ID;
+                    keyValues.Add(new KeyValuePair<int, KeyValuePair<int, IJoinControl>>(item.ID, new KeyValuePair<int, IJoinControl>(item1.ID, join)));
+                    foreach (var pv in item1.PropretyValue)
+                    {
+                        join.SetPropretyValue(pv.Key, pv.Value);
+                    }
+                    basenode._IntPutJoin.Add((join, item1.Data));
+                }
+                foreach (var item1 in item._OutPutJoin)
+                {
+                    var join = CreateJoin(item1.type, item1.Position, basenode);
+                    join.ID = item1.ID;
+                    keyValues.Add(new KeyValuePair<int, KeyValuePair<int, IJoinControl>>(item.ID,new KeyValuePair<int, IJoinControl>(item1.ID, join)));
+                    foreach (var pv in item1.PropretyValue)
+                    {
+                        join.SetPropretyValue(pv.Key, pv.Value);
+                    }
+                    basenode._OutPutJoin.Add((join, item1.Data));
+                }
+                basenode.RefreshNodes();
+                //节点创建完创建执行线
+                foreach (var item1 in data.JoinList)
+                {
+                    //执行线只支持一对一
+                    var bP_Line1 = new BP_Line
+                    {
+                        MarginLeft = 0f,
+                        MarginTop = 0f,
+                        Width = 1f,
+                        Height = 1f,
+                        backound_color = "rgb(255,255,255)",
+                    };
+                    
+                    var nodelist = bluePrint.GetChildrenList();
+                    var star1 = from grade in keyValues
+                                where grade.Key == item1._Star[0] && grade.Value.Key == item1._Star[1]
+                                select grade.Value.Value;
+                    var end1 = from grade in keyValues
+                                where grade.Key == item1._End[0] && grade.Value.Key == item1._End[1]
+                                select grade.Value.Value;
+
+                    var star = star1.FirstOrDefault();
+                    var end = end1.FirstOrDefault();
+                    if (star != null&& end!=null) {
+                        bluePrint.AddLineChildren(bP_Line1);
+                        bP_Line1.SetJoin(star, end);
+                        //bP_Line.Invalidate();
+                        //创建完成让他先刷新一下
+                        bP_Line1.RefreshDrawBezier();
+                        
+                    }
+                }
+                basenode.RefreshDrawBezier();
+            }
+            /*foreach (var item in controlList)
+            {
+                BeginInvoke(new Action(() => {
+                    (item as BP_Line).RefreshDrawBezier();
+                }));
+            }*/
+            /*this.Delay(TimeSpan.FromSeconds(1), () => {
+                foreach (var item in controlList)
+                {
+                    BeginInvoke(new Action(() => {
+                        item.RefreshDrawBezier();
+                        //item.InvalidateMeasure();
+                        //item.InvalidateArrange();
+                        //item.Invalidate();
+                    }));
+                }
+                controlList.Clear();
+            });*/
+            controlList.Clear();
+            keyValues.Clear();
+        }
+        public BPByte SerializeBP()
+        {
+            //蓝图序列化到数据保存
+            //bluePrint.Instances.Add(control);
+            List<BPNodedata> pdata = new List<BPNodedata>();
+            var index_id = 0;
+            foreach (var item5 in bluePrint.GetChildrenList())
+            {
+                if (item5 is NodeBase item)
+                {
+                    item.ID = index_id;
+                    index_id++;
+                    List<BPPutJoin> IntPutJoin = new List<BPPutJoin>();
+                    foreach (var item1 in item._IntPutJoin)
+                    {
+                        IntPutJoin.Add(new BPPutJoin
+                        {
+                            Position = item1.Item1._position,
+                            type = item1.Item1.Type,
+                            Data = item1.Item1.Get(),
+                            ID = index_id,
+                            PropretyValue = item1.Item1.Dump()
+                        }) ;
+                        item1.Item1.ID = index_id;
+                        index_id++;
+                    }
+
+                    List<BPPutJoin> OutPutJoin = new List<BPPutJoin>();
+                    foreach (var item1 in item._OutPutJoin)
+                    {
+                        OutPutJoin.Add(new BPPutJoin
+                        {
+                            Position = item1.Item1._position,
+                            type = item1.Item1.Type,
+                            Data = item1.Item1.Get(),
+                            ID = index_id,
+                            PropretyValue = item1.Item1.Dump()
+                        });
+                        item1.Item1.ID = index_id;
+                        index_id++;
+                    }
+                    pdata.Add(new BPNodedata
+                    {
+                        Point = item.ActualOffset,
+                        ID = item.ID,
+                        node = new BPNodeType
+                        {
+                            node = item.Type
+                        },
+                        _IntPutJoin = IntPutJoin,
+                        _OutPutJoin = OutPutJoin,
+                    });
                 }
             }
+            List<BPJoindata> IntPutJoin1 = new List<BPJoindata>();
+            foreach (BP_Line item in bluePrint.GetLinesList())
+            {
+                //        _Star = null;
+                //private IJoinControl _End = null;
+                //item._IntPutJoin
+                IntPutJoin1.Add(new BPJoindata
+                {
+                    _Star = new List<int> { (item.GetStar().Get_NodeRef() as NodeBase).ID , item.GetStar().ID},
+                    _End = new List<int> { (item.GetEnd().Get_NodeRef() as NodeBase).ID, item.GetEnd().ID },
+                });
+            }
+            var bp = new BPByte
+            {
+                NodeList = pdata,
+                JoinList = IntPutJoin1,
+            };
+            return bp;
         }
+        
         protected override void OnRender(DrawingContext dc)
         {
             var rect = new Rect(ActualSize);
@@ -325,7 +586,7 @@ namespace 蓝图重制版.BluePrint
         /// 设置鼠标状态
         /// </summary>
         /// <param name="State"></param>
-        public void SetMouseState(IJoinControl State, MouseButtonEventArgs e) {
+        public void SetMouseState(IJoinControl State, MouseButtonEventArgs e1) {
             //IsMouseJoin = false;
             bP_Line.Invalidate();
             bP_Line.RefreshDrawBezier();

@@ -46,7 +46,7 @@ namespace 蓝图重制版.BluePrint.INode
                 }),
             });
         }
-        public override void Execute(List<object> arguments, in Runtime.Evaluate.Result result) {
+        public override void Execute(object Context, List<object> arguments, in Runtime.Evaluate.Result result) {
             
             var data = _IntPutJoin[1].Item1.Get();
             if (arguments.Get<bool>(0))

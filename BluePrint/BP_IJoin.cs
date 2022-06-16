@@ -14,5 +14,16 @@ namespace 蓝图重制版.BluePrint
         UIElement GetParnt();
 
         Control GetThis();
+
+        /// <summary>
+        /// 取序列化属性键值
+        /// </summary>
+        /// <returns></returns>
+        Dictionary<string, object> Dump();
+        /// <summary>
+        /// 设置反序列化属性键值
+        /// </summary>
+        /// <param name="data"></param>
+        void Load(Dictionary<string, object> data);
     }
 }

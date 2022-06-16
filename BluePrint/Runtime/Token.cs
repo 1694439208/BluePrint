@@ -10,6 +10,7 @@ namespace 蓝图重制版.BluePrint.Runtime
             Expression,
             Call,
             Value,
+            ObjectValue,
             None
         }
     }

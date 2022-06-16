@@ -7,19 +7,19 @@ namespace 蓝图重制版.BluePrint.Runtime
 {
     public class Evaluate
     {
-        public static void Eval(NodeAst nodeAst) {
+        public static void Eval(NodeAst nodeAst,object GlobalContext) {
             Context.Clear();
-            Calculated(nodeAst);
+            Calculated(nodeAst, GlobalContext);
         }
         public static Dictionary<int, object> Context = new Dictionary<int, object>();
-        private static void Calculated(NodeAst nodeAst) {
+        private static void Calculated(NodeAst nodeAst, object GlobalContext) {
             switch (nodeAst.NodeToken)
             {
                 case Token.NodeToken.Expression:
                     //表达式就执行
                     foreach (var item in nodeAst.PrevNodes)
                     {
-                        Calculated(item);
+                        Calculated(item, GlobalContext);
                     }
                     //Calculated();
 
@@ -28,14 +28,14 @@ namespace 蓝图重制版.BluePrint.Runtime
                     List<object> args = new List<object>();
                     foreach (var item in nodeAst.Arguments)
                     {
-                        Calculated(item);
+                        Calculated(item, GlobalContext);
                         if (Context.TryGetValue(item.NodeJoinId,out var value))
                         {
                             args.Add(value);
                         }
                     }
-                    Result result = new Result(nodeAst.NextNodes.Count,nodeAst.Results.Count);
-                    nodeAst.NodeBase.Execute(args, result);
+                    Result result = new Result(nodeAst.NextNodes.Count,nodeAst.Results);
+                    nodeAst.NodeBase.Execute(GlobalContext,args, result);
                     //执行完毕把返回数据放在数据上下文
                     for (int i = 0; i < nodeAst.Results.Count; i++)
                     {
@@ -54,7 +54,10 @@ namespace 蓝图重制版.BluePrint.Runtime
                     {
                         if (nodeAst.NextNodes.Count > item)
                         {
-                            Calculated(nodeAst.NextNodes[item]);
+                            if (nodeAst.NextNodes[item] != null)
+                            {
+                                Calculated(nodeAst.NextNodes[item], GlobalContext);
+                            }
                         }
                         
                     }
@@ -66,6 +69,16 @@ namespace 蓝图重制版.BluePrint.Runtime
                     }
                     else {
                         Context.Add(nodeAst.NodeJoinId, nodeAst.Join.Get().Value);
+                    }
+                    break;
+                case Token.NodeToken.ObjectValue:
+                    if (Context.ContainsKey(nodeAst.NodeJoinId))
+                    {
+                        Context[nodeAst.NodeJoinId] = nodeAst.Value;
+                    }
+                    else
+                    {
+                        Context.Add(nodeAst.NodeJoinId, nodeAst.Value);
                     }
                     break;
                 case Token.NodeToken.None:
@@ -93,12 +106,12 @@ namespace 蓝图重制版.BluePrint.Runtime
             ");
         }
         public class Result {
-            public Result(int NextNodes_size,int ResultSize) {
+            public Result(int NextNodes_size,List<NodeAst> Result) {
                 _NextNode_Size = NextNodes_size;
                 //System.Diagnostics.Debug.WriteLine(ResultSize);
-                for (int i = 0; i < ResultSize; i++)
+                for (int i = 0; i < Result.Count; i++)
                 {
-                    Results.Add(i,default);
+                    Results.Add(i, Result[i].Join.Get().Value);
                 }
             }
             public int _NextNode_Size = 0;

@@ -31,6 +31,10 @@ namespace 蓝图重制版.BluePrint.Node
         /// </summary>
         public bool IsConnect = true;
         /// <summary>
+        /// 序列化用的id
+        /// </summary>
+        public int ID { set; get; }
+        /// <summary>
         /// 设置接口状态
         /// </summary>
         /// <param name="isc"></param>
@@ -92,7 +96,7 @@ namespace 蓝图重制版.BluePrint.Node
         public virtual Control Get_NodeRef() { return _Node; }
         Control _Node;
         BParent bParent;
-        NodePosition _position;
+        public NodePosition _position;
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
@@ -161,7 +165,8 @@ namespace 蓝图重制版.BluePrint.Node
         /// <summary>
         /// 渲染数据内容
         /// </summary>
-        public virtual void Render() { }
+        public virtual void Render() {}
+        
         public UIElement GetParnt()
         {
             return _Node;
@@ -207,6 +212,7 @@ namespace 蓝图重制版.BluePrint.Node
         }
         protected override void InitializeComponent()
         {
+            MarginTop = 3;
             Classes = "IJoinControl";
             B_Join = new Border
             {
@@ -280,6 +286,8 @@ namespace 蓝图重制版.BluePrint.Node
                                                     Commands = {
                                                         {nameof(MenuItem.MouseUp),(s1,e1)=>{
                                                             this.bParent.bluePrint.RemoveNode(_Node);
+                                                            this.bParent.ClearState();
+                                                            //Get_NodeRef
                                                         }}
                                                     },
                                                 },
@@ -334,22 +342,30 @@ namespace 蓝图重制版.BluePrint.Node
         /// <returns></returns>
         public bool Enabled = true;
         /// <summary>
+        /// 设置是否允许控件禁用
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEnabledd = true;
+        /// <summary>
         /// 设置控件禁用
         /// </summary>
         /// <param name="ise">false禁用 true反之</param>
         public void SetEnabled(bool ise) {
-            Body.IsEnabled = ise;
-            if (Enabled)
+            if (IsEnabledd)
             {
-                return;
+                Body.IsEnabled = ise;
+                if (Enabled)
+                {
+                    return;
+                }
             }
-            if (ise)
+            /*if (ise)
             {
                 Body.Visibility = Visibility.Visible;
             }
             else {
-                Body.Visibility = Visibility.Hidden;
-            }
+                //Body.Visibility = Visibility.e;
+            }*/
             
         }
         private UIElement Body;
@@ -369,6 +385,23 @@ namespace 蓝图重制版.BluePrint.Node
             
             //Children.Add(control);
         }
+
+        public virtual Dictionary<string, object> Dump()
+        {
+            return new Dictionary<string, object>();
+        }
+
+        public virtual void Load(Dictionary<string, object> data)
+        {
+            if (data!=null)
+            {
+                foreach (var item in data)
+                {
+                    this.SetPropretyValue(item.Key, item.Value);
+                }
+            }
+        }
+
         public delegate void JoinEvent(EveType eveType, object eventArgs);
         
         

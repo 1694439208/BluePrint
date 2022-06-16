@@ -43,5 +43,9 @@ namespace 蓝图重制版.BluePrint.Runtime
         /// 当前节点指针
         /// </summary>
         public INode.NodeBase NodeBase { set; get; }
+        /// <summary>
+        /// 自定义数据
+        /// </summary>
+        public object Value { set; get; }
     }
 }

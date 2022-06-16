@@ -22,11 +22,10 @@ namespace 蓝图重制版.BluePrint.IJoin
         public ExecJoin() : base()
         {
         }
-        public ExecJoin(BParent _bParent, NodePosition JoinDir, Control Node,bool isB = false) : base(_bParent, JoinDir,Node, Runtime.Token.NodeToken.Call)
+        public ExecJoin(BParent _bParent, NodePosition JoinDir, Control Node) : base(_bParent, JoinDir,Node, Runtime.Token.NodeToken.Call)
         {
             nodePosition = JoinDir;
             _Node = Node;
-            IsButton = isB;
             bParent = _bParent;
         }
         BParent bParent;
@@ -46,6 +45,10 @@ namespace 蓝图重制版.BluePrint.IJoin
         }
         public override void Set(Node_Interface_Data value)
         {
+            if (value.ClassValue!=null&&value.ClassValue.TryGetValue("IsButton", out var val))
+            {
+                IsButton = (bool)val;
+            }
             title = value;
         }
         public override Node_Interface_Data Get()
@@ -93,14 +96,14 @@ namespace 蓝图重制版.BluePrint.IJoin
                 };
                 (UINode as Button).Click += (s, e) => {
                     //(_Node as Context).Execute();
-                    //var a = new Runtime.NodeParse(bParent);
-                    //var ast = a.Parser(_Node as NodeBase);
-                    ////Runtime.Evaluate.Eval(ast);
+                    var a = new Runtime.NodeParse(bParent);
+                    var ast = a.Parser(_Node as NodeBase);
+                    Runtime.Evaluate.Eval(ast,null);
                     //var code = Runtime.CodeGenerator.Generator(ast);
                     //System.Diagnostics.Debug.WriteLine(code);
                     //ToSZArray
 
-                    CPF.Skia.SkiaPdf.CreatePdf(Root,"蓝图.pdf");
+                    //CPF.Skia.SkiaPdf.CreatePdf(Root,"蓝图.pdf");
                 };
             }
             base.AddControl(UINode, nodePosition);

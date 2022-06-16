@@ -105,7 +105,7 @@ namespace 蓝图重制版.BluePrint.IJoin
             UINode = new TextBlock
             {
                 Width = 60f,
-                Text = "添加序列",
+                Text = title.Title,
                 Foreground = "255,255,255",
                 TextAlignment = CPF.Drawing.TextAlignment.Center,
             };
