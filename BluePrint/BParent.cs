@@ -152,8 +152,10 @@ namespace 蓝图重制版.BluePrint
             //数据反序列化到蓝图
             List<KeyValuePair<int, KeyValuePair<int, IJoinControl>>> keyValues = new List<KeyValuePair<int, KeyValuePair<int, IJoinControl>>>();
             List<NodeBase> controlList = new List<NodeBase>();
+            var indexa = 1;
             foreach (var item in data.NodeList)
             {
+                
                 var control = CreateNode(item.node.node,item.Point.X, item.Point.Y);
                 if (control == null)
                 {
@@ -170,7 +172,12 @@ namespace 蓝图重制版.BluePrint
                 //然后再重新创建
                 foreach (var item1 in item._IntPutJoin)
                 {
+                    indexa++;
                     var join = CreateJoin(item1.type, item1.Position, basenode);
+                    //var data1 = item1.Data.Value.GetType();
+                    //Newtonsoft.Json.JObject
+                    //data1.Value = (typeof(data1.Type))(data1.Value);
+                    join.Set(item1.Data);
                     join.ID = item1.ID;
                     keyValues.Add(new KeyValuePair<int, KeyValuePair<int, IJoinControl>>(item.ID, new KeyValuePair<int, IJoinControl>(item1.ID, join)));
                     foreach (var pv in item1.PropretyValue)
@@ -181,8 +188,10 @@ namespace 蓝图重制版.BluePrint
                 }
                 foreach (var item1 in item._OutPutJoin)
                 {
+                    indexa++;
                     var join = CreateJoin(item1.type, item1.Position, basenode);
                     join.ID = item1.ID;
+                    join.Set(item1.Data);
                     keyValues.Add(new KeyValuePair<int, KeyValuePair<int, IJoinControl>>(item.ID,new KeyValuePair<int, IJoinControl>(item1.ID, join)));
                     foreach (var pv in item1.PropretyValue)
                     {
@@ -191,39 +200,39 @@ namespace 蓝图重制版.BluePrint
                     basenode._OutPutJoin.Add((join, item1.Data));
                 }
                 basenode.RefreshNodes();
-                //节点创建完创建执行线
-                foreach (var item1 in data.JoinList)
+                //basenode.RefreshDrawBezier();
+            }
+            //节点创建完创建执行线
+            foreach (var item1 in data.JoinList)
+            {
+                //执行线只支持一对一
+                var bP_Line1 = new BP_Line
                 {
-                    //执行线只支持一对一
-                    var bP_Line1 = new BP_Line
-                    {
-                        MarginLeft = 0f,
-                        MarginTop = 0f,
-                        Width = 1f,
-                        Height = 1f,
-                        backound_color = "rgb(255,255,255)",
-                    };
-                    
-                    var nodelist = bluePrint.GetChildrenList();
-                    var star1 = from grade in keyValues
-                                where grade.Key == item1._Star[0] && grade.Value.Key == item1._Star[1]
-                                select grade.Value.Value;
-                    var end1 = from grade in keyValues
-                                where grade.Key == item1._End[0] && grade.Value.Key == item1._End[1]
-                                select grade.Value.Value;
+                    MarginLeft = 0f,
+                    MarginTop = 0f,
+                    Width = 1f,
+                    Height = 1f,
+                    backound_color = "rgb(255,255,255)",
+                };
+                //var nodelist = bluePrint.GetChildrenList();
+                var star1 = from grade in keyValues
+                            where grade.Key == item1._Star[0] && grade.Value.Key == item1._Star[1]
+                            select grade.Value.Value;
+                var end1 = from grade in keyValues
+                           where grade.Key == item1._End[0] && grade.Value.Key == item1._End[1]
+                           select grade.Value.Value;
 
-                    var star = star1.FirstOrDefault();
-                    var end = end1.FirstOrDefault();
-                    if (star != null&& end!=null) {
-                        bluePrint.AddLineChildren(bP_Line1);
-                        bP_Line1.SetJoin(star, end);
-                        //bP_Line.Invalidate();
-                        //创建完成让他先刷新一下
-                        bP_Line1.RefreshDrawBezier();
-                        
-                    }
+                var star = star1.FirstOrDefault();
+                var end = end1.FirstOrDefault();
+                if (star != null && end != null)
+                {
+                    bluePrint.AddLineChildren(bP_Line1);
+                    bP_Line1.SetJoin(star, end);
+                    //bP_Line.Invalidate();
+                    //创建完成让他先刷新一下
+                    bP_Line1.RefreshDrawBezier();
+
                 }
-                basenode.RefreshDrawBezier();
             }
             /*foreach (var item in controlList)
             {

@@ -216,7 +216,7 @@ if({arguments[0]} > {arguments[1]}){{
                 var index = InPutIJoin.Children.FindIndex(j => j == join);
                 if (index==-1)
                 {
-                    throw new Exception("接口列表没有此接口，可能已经删除？");
+                    throw new Exception("简单来说动态插入的接头要和插入他的元素同一个方向，也就是谁点击插入就是谁，接口列表没有此接口，可能已经删除？");
                 }
                 if (!pos)
                 {

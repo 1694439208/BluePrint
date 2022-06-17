@@ -18,6 +18,10 @@ namespace 蓝图重制版.BluePrint.Runtime
         /// <param name="node">起始的执行节点</param>
         /// <returns></returns>
         public NodeAst Parser(INode.NodeBase node) {
+            if (node == null)
+            {
+                return new NodeAst();
+            }
             NodeAst ast = new NodeAst();
             ast.NodeJoinId = node.GetHashCode();
             ast.NodeToken = Token.NodeToken.Call;
@@ -35,6 +39,7 @@ namespace 蓝图重制版.BluePrint.Runtime
                         {
                             var Join = (item1.GetStarJoin() as IJoinControl);
                             var Prev = Join.Get_NodeRef() as INode.NodeBase;
+                            //这里有个坑自动添加的接头 要设置_Node 为父元素，要不然他会设置成add接头 类型就不对了，不过只要注意也不会出问题
                             if (Prev._IntPutJoin.Exists(v => v.Item1.GetNodeType() == Token.NodeToken.Call) ||
                                 Prev._OutPutJoin.Exists(v => v.Item1.GetNodeType() == Token.NodeToken.Call))
                             {
@@ -92,6 +97,28 @@ namespace 蓝图重制版.BluePrint.Runtime
                         //如果没有那就设置为null
                         ast.NextNodes.Add(null);
                     }
+                }
+                //如果类型是可执行节点
+                if (item.Item1.GetNodeType() == Token.NodeToken.CallValue)
+                {
+                    //获取下一个可执行节点引用然后继续生成ast
+                    var line = bParent.bluePrint.FildOutJoin(item.Item1);
+                    foreach (var item1 in line)
+                    {
+                        var nextnode = (item1.GetEndJoin() as IJoinControl).Get_NodeRef();
+                        ast.NextNodes.Add(Parser(nextnode as INode.NodeBase));
+                    }
+                    if (line.Count <= 0)
+                    {
+                        //如果没有那就设置为null
+                        ast.NextNodes.Add(null);
+                    }
+                    ast.Results.Add(new NodeAst
+                    {
+                        NodeToken = Token.NodeToken.Value,
+                        NodeJoinId = item.Item1.GetHashCode(),
+                        Join = item.Item1,
+                    });
                 }
                 //如果类型是参数
                 if (item.Item1.GetNodeType() == Token.NodeToken.Value)

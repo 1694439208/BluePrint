@@ -20,10 +20,12 @@ namespace 蓝图重制版.BluePrint.IJoin
         {
             nodePosition = JoinDir;
             _Node = Node;
+            bParent = _bParent;
         }
         //public override Control Get_NodeRef() { return base.Get_NodeRef(); }
         public NodePosition nodePosition;
         Control _Node;
+        BParent bParent;
         public override void SetDir(NodePosition value)
         {
             nodePosition = value;
@@ -57,7 +59,6 @@ namespace 蓝图重制版.BluePrint.IJoin
             base.InitializeComponent();
             //为了方便就固定了状态
             SetIsConnectState(false);
-
             var svg = new SVG
             {
                 Triggers =
