@@ -139,13 +139,19 @@ namespace 蓝图重制版.BluePrint.Node
         /// 设置接口数据
         /// </summary>
         /// <param name="value"></param>
-        public virtual void Set(Node_Interface_Data value) { _Data = value; }
+        public virtual void Set(Node_Interface_Data value) {
+            _Data.Type = _Data.Value?.GetType();
+            _Data = value;
+        }
 
         /// <summary>
         /// 读取接口数据
         /// </summary>
         /// <returns></returns>
-        public virtual Node_Interface_Data Get() { return _Data; }
+        public virtual Node_Interface_Data Get() {
+            _Data.Type = _Data.Value?.GetType();
+            return _Data;
+        }
 
         /// <summary>
         /// 设置接口参数Name
