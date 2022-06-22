@@ -2,30 +2,16 @@
 using CPF.Controls;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace 蓝图重制版.BluePrint
 {
-    class test: CpfObject
+    class test
     {
-        [PropertyMetadata("默认值")]
-        public string Test
+        public static void Log(string data)
         {
-            get
-            {
-                return (string)GetValue();
-            }
-            set
-            {
-                SetValue(value);
-            }
+            File.AppendAllText($"日志_Node", $"{data}\r\n");
         }
-
-        public void Click()
-        {
-            Test += "test";
-            MessageBox.Show(Test);
-        }
-
     }
 }

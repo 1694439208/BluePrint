@@ -40,13 +40,13 @@ namespace 蓝图重制版
                         Height = 28f,
                         Width = 67.4f,
                         Content = "Button",
-                        Commands =
+                        /*Commands =
                         {
                             {
                                 nameof(Button.Click),
                                 nameof(test.Click)
                             }
-                        }
+                        }*/
                     }
                 }
             }));
