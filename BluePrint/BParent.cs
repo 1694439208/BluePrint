@@ -212,7 +212,7 @@ namespace 蓝图重制版.BluePrint
                     MarginTop = 0f,
                     Width = 1f,
                     Height = 1f,
-                    backound_color = "rgb(255,255,255)",
+                    //backound_color = "rgb(255,255,255)",
                 };
                 //var nodelist = bluePrint.GetChildrenList();
                 var star1 = from grade in keyValues
@@ -226,6 +226,11 @@ namespace 蓝图重制版.BluePrint
                 var end = end1.FirstOrDefault();
                 if (star != null && end != null)
                 {
+                    if (star.GetNodeType() == Runtime.Token.NodeToken.CallValue || star.GetNodeType() == Runtime.Token.NodeToken.Call)
+                    {
+                        bP_Line1.backound_color = "rgb(255,255,255)";
+                        //执行节点设置为白色执行线
+                    }
                     bluePrint.AddLineChildren(bP_Line1);
                     bP_Line1.SetJoin(star, end);
                     //bP_Line.Invalidate();
