@@ -35,6 +35,10 @@ namespace 蓝图重制版.BluePrint.Node
         /// </summary>
         public int ID { set; get; }
         /// <summary>
+        /// 执行排序下标
+        /// </summary>
+        public int Index { set; get; }
+        /// <summary>
         /// 设置接口状态
         /// </summary>
         /// <param name="isc"></param>

@@ -206,6 +206,7 @@ if({arguments[0]} > {arguments[1]}){{
         /// <param name="pos">true 之前，false 之后</param>
         /// <param name="IsAddList">是否添加到接口数据列表用于管理</param>
         public void AddIntPut((IJoinControl, Node_Interface_Data) JoinControl, IJoinControl join = null,bool pos = true,bool IsAddList = false) {
+            JoinControl.Item1.Index = intput_index++;
             JoinControl.Item1.SetType(JoinControl.Item2);
             JoinControl.Item1.Set(JoinControl.Item2);
             JoinControl.Item1.Render();
@@ -247,6 +248,8 @@ if({arguments[0]} > {arguments[1]}){{
                 OuPutIJoin.Children.Remove(item);
             }
         }
+        int intput_index = 0;
+        int output_index = 0;
         /// <summary>
         /// 添加输入节点
         /// </summary>
@@ -256,6 +259,7 @@ if({arguments[0]} > {arguments[1]}){{
         /// <param name="IsAddList">是否添加到接口数据列表用于管理</param>
         public void AddOntPut((IJoinControl, Node_Interface_Data) JoinControl, IJoinControl join = null, bool pos = true, bool IsAddList = false)
         {
+            JoinControl.Item1.Index = output_index++;
             JoinControl.Item1.SetType(JoinControl.Item2);
             JoinControl.Item1.Set(JoinControl.Item2);
             JoinControl.Item1.Render();

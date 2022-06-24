@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using 蓝图重制版.BluePrint.Node;
 
@@ -65,6 +66,11 @@ namespace 蓝图重制版.BluePrint.Runtime
                                 });
                             }
                         }
+                        //连接完毕给接头排序
+                        ast.Arguments = ast.Arguments.OrderBy(a => a.Join.Index).ToList();
+
+                                  //OrderByDescending m.Join.ID;
+                                  //orderby m.Level   //默认按照从小到大进行排序  
                     }
                     else {
                         //没有任何输入连接，那就以它自身为准
