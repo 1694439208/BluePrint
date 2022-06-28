@@ -259,6 +259,8 @@ namespace 蓝图重制版.BluePrint
             });*/
             controlList.Clear();
             keyValues.Clear();
+
+            //this.OnLayoutUpdated();
         }
         public BPByte SerializeBP()
         {
@@ -266,7 +268,8 @@ namespace 蓝图重制版.BluePrint
             //bluePrint.Instances.Add(control);
             List<BPNodedata> pdata = new List<BPNodedata>();
             var index_id = 0;
-            foreach (var item5 in bluePrint.GetChildrenList())
+            var ChildList = bluePrint.GetChildrenList();
+            foreach (var item5 in ChildList)
             {
                 if (item5 is NodeBase item)
                 {
@@ -303,7 +306,7 @@ namespace 蓝图重制版.BluePrint
                     }
                     pdata.Add(new BPNodedata
                     {
-                        Point = item.ActualOffset,
+                        Point = new Point(item.MarginLeft.Value, item.MarginTop.Value),//item.ActualOffset
                         ID = item.ID,
                         node = new BPNodeType
                         {
