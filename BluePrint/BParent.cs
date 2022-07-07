@@ -668,7 +668,14 @@ namespace 蓝图重制版.BluePrint
                     if (a.GetJoinType() == b.GetJoinType())
                     {
                         //var add = a.GetJoinType();
-                        if (a.GetJoinType() == typeof(JoinType))
+                        /*if (star.GetNodeType() == Runtime.Token.NodeToken.CallValue || star.GetNodeType() == Runtime.Token.NodeToken.Call)
+                        {
+                            bP_Line1.backound_color = "rgb(255,255,255)";
+                            //执行节点设置为白色执行线
+                        }*/
+                        if (a.GetJoinType() == typeof(JoinType)|| 
+                            a.GetNodeType() == Runtime.Token.NodeToken.CallValue || 
+                            a.GetNodeType() == Runtime.Token.NodeToken.Call)
                         {
                             if (!bluePrint.FildIsJoinRef(a) && !bluePrint.FildIsJoinRef(b))
                             {
