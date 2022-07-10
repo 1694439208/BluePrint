@@ -447,11 +447,12 @@ namespace 蓝图重制版.BluePrint
         }
 
         float scale = 1;
-        float scale_value = 0.99f;
+        float scale_value = 0.8f;
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             Parent.Invalidate();
             var p = e.MouseDevice.GetPosition(bluePrint);
+            //var p = new Point(this.ActualSize.Width / 2, this.ActualSize.Height / 2);
             Matrix matrix = Matrix.Identity;
             if (bluePrint.RenderTransform is MatrixTransform transform)
             {
