@@ -795,7 +795,7 @@ namespace 蓝图重制版.BluePrint
             var p1 = e.MouseDevice.GetPosition(bluePrint);
             MouseJoin.MarginLeft = p1.X;
             MouseJoin.MarginTop = p1.Y;
-            if (mousePos.HasValue)
+            if (mousePos.HasValue && e.RightButton == MouseButtonState.Pressed)
             {
                 //bluePrint.MarginLeft
                 var aa = e.Location.X - bluePrint.MarginLeft.Value / scale;
