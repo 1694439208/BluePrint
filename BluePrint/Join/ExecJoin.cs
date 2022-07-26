@@ -56,7 +56,7 @@ namespace 蓝图重制版.BluePrint.IJoin
             return title;
         }
         public UIElement UINode = new Panel {
-            Width = 20f,
+            //Width = 5,
         };
 
         public Node_Interface_Data title;
@@ -105,6 +105,7 @@ namespace 蓝图重制版.BluePrint.IJoin
 
                     //CPF.Skia.SkiaPdf.CreatePdf(Root,"蓝图.pdf");
                 };
+                
             }
             base.AddControl(UINode, nodePosition);
         }

@@ -105,7 +105,7 @@ namespace 蓝图重制版.BluePrint.IJoin
             //b.Child.RaiseEvent(e, nameof(DoubleClick));
             UINode = new TextBlock
             {
-                Width = 60f,
+                MaxWidth = 60f,
                 Text = title.Title,
                 Foreground = "255,255,255",
                 TextAlignment = CPF.Drawing.TextAlignment.Center,

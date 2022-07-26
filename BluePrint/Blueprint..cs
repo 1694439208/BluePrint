@@ -46,7 +46,7 @@ namespace 蓝图重制版.BluePrint
             Children.Add(control);
         }
         /// <summary>
-        /// 蓝图添加节点
+        /// 蓝图添加节点此节点为内置默认节点，不可删除
         /// </summary>
         /// <param name="control"></param>
         public void AddChildren1(Control control)
@@ -118,6 +118,15 @@ namespace 蓝图重制版.BluePrint
         public List<BP_Line> FildIutJoin(Control Star)
         {
             return Lines.Where(x => x.GetEndJoin() == Star).ToList();
+        }
+        /// <summary>
+        /// 清空蓝图
+        /// </summary>
+        public void Clear() {
+            for (int i = 0; i < Instances.Count; i++)
+            {
+                RemoveNode(Instances[i]);
+            }
         }
         /// <summary>
         /// 从蓝图删除节点

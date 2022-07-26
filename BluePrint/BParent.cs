@@ -136,7 +136,7 @@ namespace 蓝图重制版.BluePrint
             /// </summary>
             public List<int> _End { set; get; }
         }
-        public struct BPByte
+        public class BPByte
         {
             /// <summary>
             /// 节点列表
@@ -421,7 +421,7 @@ namespace 蓝图重制版.BluePrint
                 Height = 1f,
                 Visibility = Visibility.Hidden
             };
-            bluePrint.AddChildren(MouseJoin);
+            bluePrint.AddChildren1(MouseJoin);
             //
             //添加默认拖动显示线条
             bP_Line = new BP_Line
@@ -441,7 +441,7 @@ namespace 蓝图重制版.BluePrint
             //bP_Line.Size = new SizeField(1,1);AddLineChildren
             //ClearState();AddChildren
             //之所以不用AddLineChildren 是因为此线条为默认，不参与计算判断
-            bluePrint.AddChildren(bP_Line);
+            bluePrint.AddChildren1(bP_Line);
             //ClearState();
 
         }
