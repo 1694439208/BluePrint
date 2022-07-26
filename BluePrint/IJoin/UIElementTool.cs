@@ -23,7 +23,7 @@ namespace 蓝图重制版.BluePrint.IJoin
         /// <returns></returns>
         public static string GetID(this int element, bool IsD = true)
         {
-            return $"{(IsD ? "$" : "")}temp_{element}";
+            return $"{(IsD ? "var " : "")}temp_{element}";
         }
         public static string join(this List<string> element, string str)
         {

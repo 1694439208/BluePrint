@@ -47,10 +47,10 @@ namespace 蓝图重制版.BluePrint.INode
                         }},
                     },
                 },new Node_Interface_Data{
-                    Title = "执行结束的接头",
+                    Title = "添加执行",
                     Value = new JoinType("执行结束"),
                     Type = typeof(JoinType),
-                    Tips = "添加一个执行序列",
+                    Tips = "添加执行",
                 }),
             });
         }

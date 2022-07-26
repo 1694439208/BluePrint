@@ -758,7 +758,8 @@ namespace 蓝图重制版.BluePrint
                         }
                         else {
                             //接口数据类型不匹配
-                            test.Log($"a:{a.GetJoinType()},b:{b.GetJoinType()}");
+                            var log = $"a:{a.GetJoinType()},b:{b.GetJoinType()}";
+                            test.Log(log);
                             UIElementTool.Toast(bluePrint, "接口数据类型不匹配", p);
                         }
                     }

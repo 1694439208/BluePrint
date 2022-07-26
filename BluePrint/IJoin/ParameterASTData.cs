@@ -7,6 +7,26 @@ namespace 蓝图重制版.BluePrint.IJoin
     public class ParameterAST
     {
         /// <summary>
+        /// 取ast代码生成
+        /// </summary>
+        /// <param name="IsD">是否添加var申明</param>
+        /// <returns></returns>
+        public string GetUid(bool IsD = true)
+        {
+            if (IsThis)
+            {
+                return Join.Get()?.Value?.ToString()??"";
+            }
+            if (IsExpression)
+            {
+                return CodeTemplate??"";
+            }
+            else
+            {
+                return ID.GetID(IsD);
+            }
+        }
+        /// <summary>
         /// 接口id用来生成变量名
         /// </summary>
         public int ID { set; get; }
@@ -14,6 +34,14 @@ namespace 蓝图重制版.BluePrint.IJoin
         /// 接口对象
         /// </summary>
         public Node.IJoinControl Join { set; get; }
+        /// <summary>
+        /// 表达式模板代码
+        /// </summary>
+        public string CodeTemplate { set; get; }
+        /// <summary>
+        /// 是否为表达式
+        /// </summary>
+        public bool IsExpression { set; get; }
         /// <summary>
         /// 当前接口指针是否是自己
         /// </summary>

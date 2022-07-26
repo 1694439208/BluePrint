@@ -41,6 +41,32 @@ namespace 蓝图重制版.BluePrint.Node
         Node_Interface_Data textBoxDate;
         public override void Set(Node_Interface_Data value)
         {
+            if (value.ClassValue != null && value.ClassValue.TryGetValue("Watermark", out var val))
+            {
+                Watermark = (string)val;
+            }
+            if (value.ClassValue != null && value.ClassValue.TryGetValue("Enabled", out var val1))
+            {
+                Enabled = (bool)val1;
+            }
+            if (value.ClassValue != null && value.ClassValue.TryGetValue("Width", out var width))
+            {
+                UINode.Width = (float)width;
+            }
+            //this[nameof(MinWidth)] = (this, nameof(ActualSize), a => (FloatField)((Size)a).Width);
+            //this.SetPropretyValue("ad","123");
+            //自动绑定属性
+            /*foreach (var item in value.ClassValue)
+            {
+                if (this is CpfObject)
+                {
+                    if (this.HasProperty(item.Key))
+                    {
+                        this.SetValue(item.Value,item.Key);
+                    }
+                }
+            }*/
+
             textBoxDate = value;
             UINode.Text = textBoxDate.Value.ToString();
 ;
@@ -53,15 +79,14 @@ namespace 蓝图重制版.BluePrint.Node
         public FloatField width = 80;
         public ElTextBox UINode = new ElTextBox
         {
+            Width = 80f,
             ClipToBounds = true,
             Text = "test",
             ///Foreground = Color.FromRgb(255, 255, 255),
-            //Height = 30,
-            //HScrollBarVisibility = ScrollBarVisibility.Hidden,
-            //VScrollBarVisibility = ScrollBarVisibility.Hidden,
+            //Height = 25,
+            
             ///BorderFill = "rgb(220, 220, 220)",
             //TextAlignment = TextAlignment.Center,
-            Classes = { "single" },
             Commands =
             {
                 {
@@ -84,7 +109,7 @@ namespace 蓝图重制版.BluePrint.Node
         protected override void InitializeComponent()
         {
             base.InitializeComponent();
-            UINode.Width = width;
+            //UINode.Width = width;
             base.AddControl(new Panel
             {
                 Classes = "el-textbox",

@@ -13,15 +13,20 @@ namespace 蓝图重制版.BluePrint.Runtime
         private static string Calculated(NodeAst nodeAst)
         {
             var ret = "";
+            if (nodeAst == null)
+            {
+                return "";
+            }
             switch (nodeAst.NodeToken)
             {
+                case Token.NodeToken.ExpressionValue:
                 case Token.NodeToken.Expression:
                     List<string> PrevNodes1 = new List<string>();
                     foreach (var item in nodeAst.PrevNodes)
                     {
                         PrevNodes1.Add(Calculated(item));
                     }
-                    ret = string.Join(";\r\n", PrevNodes1);
+                    ret = string.Join("", PrevNodes1);
                     break;
                 case Token.NodeToken.Call:
                     List<string> NextNodesCode = new List<string>();
@@ -50,9 +55,20 @@ namespace 蓝图重制版.BluePrint.Runtime
                     }
 
                     List<string> PrevNodes = new List<string>();
-                    foreach (var item in nodeAst.Arguments)
+                    for (int i = 0; i < nodeAst.Arguments.Count; i++)
                     {
-                        PrevNodes.Add(Calculated(item));
+                        var item = nodeAst.Arguments[i];
+                        var Value = Calculated(item);
+                        if (item.NodeToken == Token.NodeToken.ExpressionValue)
+                        {
+                            Arguments[i].CodeTemplate = Value;
+                            Arguments[i].IsExpression = true;
+                        }
+                        else
+                        {
+                            PrevNodes.Add(Value);
+                            Arguments[i].IsExpression = false;
+                        }
                     }
                     ret = nodeAst.NodeBase.CodeTemplate(NextNodesCode, PrevNodes, Arguments, Results);
                     break;
@@ -63,6 +79,8 @@ namespace 蓝图重制版.BluePrint.Runtime
                 default:
                     break;
             }
+            
+            
             return ret;
         }
     }

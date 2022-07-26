@@ -44,6 +44,10 @@ namespace 蓝图重制版.BluePrint.Node
             {
                 text1.Text = __value.Value.ToString();
             }
+            else if (GetJoinType() == typeof(IEnumerable<string>))
+            {
+                text1.Text = "列表数据";
+            }
             else {
                 text1.Text = __value.Value.ToString();
             }

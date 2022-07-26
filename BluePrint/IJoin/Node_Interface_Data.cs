@@ -36,6 +36,10 @@ namespace 蓝图重制版.BluePrint.IJoin
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public T GetData<T>() {
+            if (Value==null)
+            {
+                return default;
+            }
             return (T)Value;
         }
     }

@@ -9,8 +9,10 @@ namespace 蓝图重制版.BluePrint.Runtime
     public class NodeParse
     {
         public BParent bParent;
-        public NodeParse(BParent parent) {
+        public bool Isort;
+        public NodeParse(BParent parent,bool isort = true) {
             bParent = parent;
+            Isort = isort;
         }
         /// <summary>
         /// 实际上我们只需要遍历节点所有执行线就可以生成ast
@@ -58,7 +60,7 @@ namespace 蓝图重制版.BluePrint.Runtime
                                 //如果没有执行线，那就继续向上遍历
                                 ast.Arguments.Add(new NodeAst
                                 {
-                                    NodeToken = Token.NodeToken.Expression,
+                                    NodeToken = Token.NodeToken.ExpressionValue,
                                     NodeJoinId = Join.GetHashCode(),//当前输入引用输出的指针
                                     PrevNodes = { Parser(Prev as INode.NodeBase) },
                                     Join = Join,
@@ -66,8 +68,11 @@ namespace 蓝图重制版.BluePrint.Runtime
                                 });
                             }
                         }
-                        //连接完毕给接头排序
-                        ast.Arguments = ast.Arguments.OrderBy(a => a.Join.Index).ToList();
+                        if (Isort)
+                        {
+                            //连接完毕给接头排序
+                            ast.Arguments = ast.Arguments.OrderBy(a => a.Join.Index).ToList();
+                        }
 
                                   //OrderByDescending m.Join.ID;
                                   //orderby m.Level   //默认按照从小到大进行排序  

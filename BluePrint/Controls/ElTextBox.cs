@@ -8,8 +8,14 @@ namespace Hm_Controls
 {
     public class ElTextBox : TextBox
     {
+
         protected override void InitializeComponent()
         {
+            Classes.Add("textBox");
+            HScrollBarVisibility = ScrollBarVisibility.Hidden;
+            VScrollBarVisibility = ScrollBarVisibility.Hidden;
+            Height = 23;
+            FontSize = 16;
             this.Children.Add(new Border
             {
                 BorderStroke = "0",
@@ -35,7 +41,7 @@ namespace Hm_Controls
                 MarginTop = 5,
                 IsHitTestVisible = false,
                 Text = "66666666",
-                Foreground = "192,196,204",
+                Foreground = "#9195a3",
                 Bindings =
                 {
                     {nameof(TextBlock.Text),nameof(Placeholder),this },
