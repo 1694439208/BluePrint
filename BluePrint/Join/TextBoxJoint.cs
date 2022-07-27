@@ -51,10 +51,10 @@ namespace 蓝图重制版.BluePrint.Node
             }
             if (value.ClassValue != null && value.ClassValue.TryGetValue("Width", out var width))
             {
-                UINode.Width = (float)width;
+                UINode.Width = Convert.ToSingle(width);
             }
             //this[nameof(MinWidth)] = (this, nameof(ActualSize), a => (FloatField)((Size)a).Width);
-            //this.SetPropretyValue("ad","123");
+            //this.SetPropretyValue("ad","123");ObjectTypeDic[key].Item2;
             //自动绑定属性
             /*foreach (var item in value.ClassValue)
             {

@@ -39,6 +39,10 @@ namespace 蓝图重制版.BluePrint.IJoin
             return GetParentPosition(element, point, parent);
         }
         public static Point GetParentPosition(UIElement element,Point point, UIElement parent) {
+            if (element == null)
+            {
+                return point;
+            }
             if (element.Parent == parent)//element.Parent == null||
             {
                 return element.TransformPoint(point);

@@ -123,9 +123,10 @@ namespace 蓝图重制版.BluePrint
         /// 清空蓝图
         /// </summary>
         public void Clear() {
-            for (int i = 0; i < Instances.Count; i++)
+            var temp_instances = Instances.ToArray();
+            for (int i = 0; i < temp_instances.Length; i++)
             {
-                RemoveNode(Instances[i]);
+                RemoveNode(temp_instances[i]);
             }
         }
         /// <summary>
@@ -135,6 +136,10 @@ namespace 蓝图重制版.BluePrint
         public void RemoveNode(Control control) {
             //这个要重新做一下，遍历要删除节点的接口，再删除线条节点
             //Lines.Remove(control);
+            if (control is BP_Line)
+            {
+                return;
+            }
             var context = (control as Context);
             foreach (var item in context.OutPutJoin)
             {
