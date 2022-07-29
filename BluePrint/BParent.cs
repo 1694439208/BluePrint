@@ -556,6 +556,10 @@ namespace 蓝图重制版.BluePrint
                                 //popup.Hide();
                             }},
                             {nameof(Popup.LostFocus),(s1,e1)=>{
+                                if (earchStr!=null)
+                                {
+                                    earchStr.Text = "";
+                                }
                                 popup.Hide();
                                 //var a = 123;
                                 //popup.Visibility = Visibility.Hidden;
@@ -573,6 +577,7 @@ namespace 蓝图重制版.BluePrint
 
             }
         }
+        public Hm_Controls.ElTextBox earchStr = null;
         /// <summary>
         /// 清空当前拖放状态
         /// </summary>

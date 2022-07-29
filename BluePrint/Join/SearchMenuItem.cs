@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using 蓝图重制版.BluePrint.Controls;
 using 蓝图重制版.BluePrint.INode;
+using System.Linq;
 
 namespace 蓝图重制版.BluePrint.Join
 {
@@ -50,27 +51,35 @@ namespace 蓝图重制版.BluePrint.Join
                         }
                     }
                 }
-                Nodes = new Collection<TreeViewItem>();
-                foreach (var item in valuePairs)
-                {
-                    var treev1 = new SearchTreeViewItem
-                    {
-                        Header = item.Key,
-                    };
-                    foreach (var item1 in item.Value)
-                    {
-                        treev1.Items.Add(new SearchTreeViewItem { 
-                            Header = item1.Item1.NodeName,
-                            Tag = item1.Item2,
-                        });
-                    }
-                    Nodes.Add(treev1) ;
-                }
+                SetNodes(valuePairs);
                 /*this.Delay(TimeSpan.FromSeconds(1),()=> {
                     Debug.WriteLine(tree.GetChildren().Count);
                     Debug.WriteLine(tree.Items.Count);
                 });*/
 
+            }
+        }
+        public void SetNodes(Dictionary<string, List<(IJoin.NodeBaseInfoAttribute, Type)>> valuePair) {
+            if (Nodes == null)
+            {
+                Nodes = new Collection<TreeViewItem>();
+            }
+            Nodes.Clear();
+            foreach (var item in valuePair)
+            {
+                var treev1 = new SearchTreeViewItem
+                {
+                    Header = item.Key,
+                };
+                foreach (var item1 in item.Value)
+                {
+                    treev1.Items.Add(new SearchTreeViewItem
+                    {
+                        Header = item1.Item1.NodeName,
+                        Tag = item1.Item2,
+                    });
+                }
+                Nodes.Add(treev1);
             }
         }
         /// <summary>
@@ -94,7 +103,6 @@ namespace 蓝图重制版.BluePrint.Join
                 item.IsExpanded = false;
             }
         }
-
         protected override void InitializeComponent()
         {
             _popup = Parent as Popup;
@@ -158,6 +166,28 @@ namespace 蓝图重制版.BluePrint.Join
                                 MarginBottom = 0f,
                                 Placeholder = "搜索",
                                 Classes = "single",
+                                Commands = {
+                                    {nameof(ElTextBox.TextChanged),(s,e)=>{
+                                         //(s as TextBox).Text
+                                         //Debug.WriteLine((s as ElTextBox).Text);
+                                        var data = ((ElTextBox)s).Text;
+                                        if (data == string.Empty||data == "")
+                                        {
+                                            SetNodes(valuePairs);
+                                            return;
+                                        }
+                                        var ret = valuePairs.Where(a=>a.Value.Any(b=>b.Item1.NodeName.IndexOf(data)!=-1))
+                                        .Select(a=>{
+                                            return new KeyValuePair<string,List<(IJoin.NodeBaseInfoAttribute,Type)>>(
+                                                a.Key,
+                                                a.Value.Where(b=>b.Item1.NodeName.IndexOf(data)!=-1).ToList()
+                                            );
+                                        });
+                                        var reta = ret.ToDictionary(a=>a.Key,b=>b.Value);//string,List<(IJoin.NodeBaseInfoAttribute,Type)>
+                                        SetNodes(reta);
+                                        Open();
+                                    }} 
+                                }
                             },
                             new TextBlock
                             {
@@ -169,7 +199,23 @@ namespace 蓝图重制版.BluePrint.Join
                                 Commands = {
                                     {nameof(TextBlock.MouseUp),(s,e)=>{
                                         var Searchtextbox = FindPresenterByName<ElTextBox>("SearchElTextBox");
+                                        var data = Searchtextbox.Text;
                                         Searchtextbox.Text = "";
+                                        if (data == string.Empty||data == "")
+                                        {
+                                            SetNodes(valuePairs);
+                                            return;
+                                        }
+                                        var ret = valuePairs.Where(a=>a.Value.Any(b=>b.Item1.NodeName.IndexOf(data)!=-1))
+                                        .Select(a=>{
+                                            return new KeyValuePair<string,List<(IJoin.NodeBaseInfoAttribute,Type)>>(
+                                                a.Key,
+                                                a.Value.Where(b=>b.Item1.NodeName.IndexOf(data)!=-1).ToList()
+                                            );
+                                        });
+                                        var reta = ret.ToDictionary(a=>a.Key,b=>b.Value);//string,List<(IJoin.NodeBaseInfoAttribute,Type)>
+                                        SetNodes(reta);
+                                        Open();
                                     }}
                                 },
                                 Triggers = {
@@ -188,7 +234,6 @@ namespace 蓝图重制版.BluePrint.Join
                         {
                             new TestTreeView
                             {
-                                
                                 MarginTop = 3,
                                 Name = "TreeView1",
                                 Width = "100%",
@@ -198,7 +243,7 @@ namespace 蓝图重制版.BluePrint.Join
                                 //ItemsMemberPath=nameof(NodeData.Nodes),
                                 PresenterFor = this,
                                 Bindings = {
-                                    {"Items","Nodes", this}
+                                    {nameof(TestTreeView.Items),nameof(Nodes), this}
                                 },
                                 Commands = {
                                     {nameof(TreeView.ItemMouseUp),(s,e)=>{
@@ -221,6 +266,8 @@ namespace 蓝图重制版.BluePrint.Join
             }) ;
             //this.Triggers.Add(nameof(IsMouseOver), Relation.Me, null, (nameof(Background), "#fff"));
             SetItems();
+
+            parent.earchStr = FindPresenterByName<ElTextBox>("SearchElTextBox");
         }
     }
 }
