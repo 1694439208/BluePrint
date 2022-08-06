@@ -76,10 +76,10 @@ namespace 蓝图重制版.BluePrint.Node
             textBoxDate.Value = Convert.ChangeType(UINode.Text, GetJoinType());
             return textBoxDate;
         }
-        public FloatField width = 80;
+        public FloatField width = 90f;
         public ElTextBox UINode = new ElTextBox
         {
-            Width = 80f,
+            Width = 90f,
             ClipToBounds = true,
             Text = "test",
             ///Foreground = Color.FromRgb(255, 255, 255),

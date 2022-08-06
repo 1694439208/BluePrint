@@ -42,6 +42,7 @@ namespace 蓝图重制版.BluePrint
                     control = (CPF.Controls.Control)Control;
                 }
             }
+            bluePrint.Invalidate();
             return control;
         }
         /// <summary>

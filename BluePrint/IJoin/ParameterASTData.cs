@@ -15,11 +15,31 @@ namespace 蓝图重制版.BluePrint.IJoin
         {
             if (IsThis)
             {
-                return Join.Get()?.Value?.ToString()??"";
+                return Join.Get()?.Value?.ToString() ?? "";
             }
             if (IsExpression)
             {
                 return CodeTemplate??"";
+            }
+            else
+            {
+                return ID.GetID(IsD);
+            }
+        }
+        /// <summary>
+        /// 取ast代码生成批量，如果不确定他是变量还是内容 就调用这个，统一处理
+        /// </summary>
+        /// <param name="IsD">是否添加var申明</param>
+        /// <returns></returns>
+        public string GetUidALL(bool IsD = true)
+        {
+            if (IsThis)
+            {
+                return $"\"{Join.Get()?.Value?.ToString() ?? ""}\"";
+            }
+            if (IsExpression)
+            {
+                return CodeTemplate ?? "";
             }
             else
             {
