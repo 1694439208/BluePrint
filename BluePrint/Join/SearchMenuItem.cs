@@ -108,7 +108,7 @@ namespace 蓝图重制版.BluePrint.Join
             _popup = Parent as Popup;
             MarginTop = 10;
             Width = 280;
-            Height = 300;
+            Height = 380;
             Background = "38,38,38";
             BorderType = BorderType.BorderThickness;
             BorderThickness = "1,1,1,1";
@@ -237,7 +237,7 @@ namespace 蓝图重制版.BluePrint.Join
                                 MarginTop = 3,
                                 Name = "TreeView1",
                                 Width = "100%",
-                                Height = "218",
+                                Height = 300,
                                 //Size= SizeField.Fill,
                                 //DisplayMemberPath=nameof(NodeData.Text),
                                 //ItemsMemberPath=nameof(NodeData.Nodes),
