@@ -3,9 +3,9 @@
 
 ## 编译 
 
-> 首先net开发首选windows+vs,此库是使用vs+ [CPF](http://cpf.cskin.net/) 开发,支持可视化设计拖动节点, 所以想要liunx或者mac开发也不是不行，只不过要自己研究
+> 首先net开发首选windows+vs,此库是使用vs+ [CPF](http://cpf.cskin.net/) 开发,支持可视化设计拖动节点, 所以想要linux或者mac开发也不是不行，只不过要自己研究
 
-> 为了方便演示我编译了liunx和mac的各个版本的demo来供大家下载测试 
+> 为了方便演示我编译了linux和mac的各个版本的demo来供大家下载测试 
  
 ## 操作
 > #鼠标滚轮缩放蓝图
